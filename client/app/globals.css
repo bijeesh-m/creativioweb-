@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1a1f36;
+  --color-navy-light: #2d3354;
+  --color-cream: #faf8f5;
+  --color-cream-dark: #f0ece6;
+  --color-accent: #1DCD9F;
+  --color-accent-light: #d4a96a;
+  --color-teal: #4a8b8f;
+  --color-teal-dark: #2d6a6e;
+  --color-charcoal: #333333;
+  --color-muted: #8a8a8a;
+  --color-border: #e5e5e5;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #E6F0FF;
+  background-color: #0A0A0A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-light);
+  border-radius: 3px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-navy);
+  color: white;
+}
+
+/* Typography helpers */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Image hover zoom — GPU-accelerated */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Bounce for scroll indicator */
+@keyframes subtle-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-subtle-bounce {
+  animation: subtle-bounce 2.5s ease-in-out infinite;
+}
