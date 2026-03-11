@@ -62,21 +62,53 @@ class UploadService {
      */
     static async uploadToCloudinaryFromLocal(filePath, folder) {
         try {
-            const result = await cloudinary.uploader.upload(filePath, {
+            // Determine if file is a video by extension (case-insensitive)
+            const isVideo = filePath.match(/\.(mp4|mov|avi|wmv|flv|mkv|webm)$/i);
+
+            const options = {
                 folder: `creativio/${folder}`,
                 resource_type: 'auto',
-                quality: 'auto:best',
-                fetch_format: 'auto',
-                flags: 'progressive',
+            };
+
+            // Cloudinary's synchronous transformations fail on videos > 40MB.
+            // We only apply these during upload for images.
+            if (!isVideo) {
+                options.quality = 'auto:best';
+                options.fetch_format = 'auto';
+                options.flags = 'progressive';
+            }
+
+            // Using upload_large to chunk large files safely, wrapped in a promise to handle stream completion
+            const result = await new Promise((resolve, reject) => {
+                cloudinary.uploader.upload_large(filePath, options, (error, uploadResult) => {
+                    if (error) return reject(error);
+                    resolve(uploadResult);
+                });
             });
+
+            if (!result) {
+                throw new Error('Cloudinary upload failed: No result returned');
+            }
 
             // Clean up local file after upload
             fs.unlink(filePath, (err) => {
                 if (err) console.error('Error deleting local file:', err);
             });
 
+            // For videos, dynamically insert Cloudinary's optimization flags into the URL
+            let finalUrl = result.secure_url || result.url;
+            
+            if (!finalUrl) {
+                console.error('Cloudinary response missing URL:', result);
+                throw new Error('Cloudinary upload failed: No URL in response');
+            }
+
+            if (isVideo) {
+                finalUrl = finalUrl.replace('/upload/', '/upload/q_auto,f_auto/');
+            }
+
             return {
-                url: result.secure_url,
+                url: finalUrl,
                 publicId: result.public_id,
                 key: null,
                 width: result.width,

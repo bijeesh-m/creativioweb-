@@ -1,6 +1,14 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { api } from "@/lib/api";
+import {
+    LuPlus,
+    LuCloudUpload,
+    LuPencil,
+    LuTrash2,
+    LuX,
+    LuMaximize2
+} from "react-icons/lu";
 
 export default function WorksManager() {
     const [works, setWorks] = useState<any[]>([]);
@@ -10,8 +18,10 @@ export default function WorksManager() {
     const [formData, setFormData] = useState({ title: "", categories: "[]", tags: "", description: "", client: "", tall: false, featured: false, isPublished: true });
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState("");
+    const [mediaType, setMediaType] = useState("image");
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState("");
+    const [selectedWorkForView, setSelectedWorkForView] = useState<any>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => { loadWorks(); }, []);
@@ -24,19 +34,24 @@ export default function WorksManager() {
 
     const resetForm = () => {
         setFormData({ title: "", categories: "[]", tags: "", description: "", client: "", tall: false, featured: false, isPublished: true });
-        setImageFile(null); setImagePreview(""); setEditingWork(null); setShowForm(false); setError("");
+        setImageFile(null); setImagePreview(""); setMediaType("image"); setEditingWork(null); setShowForm(false); setError("");
     };
 
     const handleEdit = (work: any) => {
         setEditingWork(work);
         setFormData({ title: work.title, categories: JSON.stringify(work.categories || []), tags: work.tags || "", description: work.description || "", client: work.client || "", tall: work.tall || false, featured: work.featured || false, isPublished: work.isPublished !== false });
         setImagePreview(work.image?.url || "");
+        setMediaType(work.image?.mediaType || "image");
         setShowForm(true);
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (file) { setImageFile(file); setImagePreview(URL.createObjectURL(file)); }
+        if (file) {
+            setImageFile(file);
+            setImagePreview(URL.createObjectURL(file));
+            setMediaType(file.type.startsWith('video/') ? 'video' : 'image');
+        }
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -72,7 +87,9 @@ export default function WorksManager() {
         <div className="admin-manager">
             <div className="admin-manager-header">
                 <h2>Works / Projects</h2>
-                <button className="admin-btn admin-btn-primary" onClick={() => { resetForm(); setShowForm(true); }}>+ Add Work</button>
+                <button className="admin-btn admin-btn-primary" onClick={() => { resetForm(); setShowForm(true); }}>
+                    <LuPlus size={18} /> Add Work
+                </button>
             </div>
             {error && <div className="admin-alert admin-alert-error">{error}</div>}
 
@@ -81,7 +98,7 @@ export default function WorksManager() {
                     <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
                         <div className="admin-modal-header">
                             <h3>{editingWork ? "Edit Work" : "Add New Work"}</h3>
-                            <button className="admin-modal-close" onClick={resetForm}>×</button>
+                            <button className="admin-modal-close" onClick={resetForm}><LuX /></button>
                         </div>
                         <form onSubmit={handleSubmit} className="admin-form">
                             <div className="admin-form-grid">
@@ -92,10 +109,46 @@ export default function WorksManager() {
                             </div>
                             <div className="admin-input-group"><label>Description</label><textarea rows={3} value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} /></div>
                             <div className="admin-input-group">
-                                <label>Image {!editingWork && "*"}</label>
-                                <div className="admin-file-upload" onClick={() => fileInputRef.current?.click()}>
-                                    {imagePreview ? <img src={imagePreview} alt="Preview" className="admin-image-preview" /> : <div className="admin-file-placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg><p>Click to upload</p></div>}
-                                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} hidden />
+                                <label>Media (Image or Video) {!editingWork && "*"}</label>
+                                {imagePreview && (
+                                    <div className="admin-media-preview-container">
+                                        {mediaType === 'video' ? (
+                                            <video
+                                                src={imagePreview}
+                                                className="admin-image-preview"
+                                                controls
+                                                onClick={(e) => e.stopPropagation()}
+                                            />
+                                        ) : (
+                                            <img
+                                                src={imagePreview}
+                                                alt="Preview"
+                                                className="admin-image-preview"
+                                                onClick={(e) => e.stopPropagation()}
+                                            />
+                                        )}
+                                        <button
+                                            type="button"
+                                            className="admin-remove-media"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setImageFile(null);
+                                                setImagePreview("");
+                                            }}
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                )}
+                                <div
+                                    className={`admin-file-upload ${imagePreview ? 'has-preview' : ''}`}
+                                    onClick={() => fileInputRef.current?.click()}
+                                >
+                                    <div className="admin-file-placeholder">
+                                        <LuCloudUpload size={32} />
+                                        <p>{imagePreview ? "Change Media" : "Click to upload"}</p>
+                                    </div>
+                                    <input ref={fileInputRef} type="file" accept="image/*,video/*" onChange={handleImageChange} hidden />
                                 </div>
                             </div>
                             <div className="admin-checkbox-group">
@@ -118,18 +171,77 @@ export default function WorksManager() {
                     <tbody>
                         {works.map((work) => (
                             <tr key={work._id}>
-                                <td>{work.image?.url ? <img src={work.image.url} alt={work.title} className="admin-table-thumb" /> : <div className="admin-table-thumb-placeholder" />}</td>
+                                <td>
+                                    {work.image?.url ? (
+                                        <div
+                                            className="admin-table-thumb-clickable"
+                                            onClick={() => setSelectedWorkForView(work)}
+                                            title="Click to view"
+                                        >
+                                            {work.image?.mediaType === 'video' ? (
+                                                <video
+                                                    src={work.image.url}
+                                                    className="admin-table-thumb"
+                                                    muted
+                                                    onMouseOver={(e) => e.currentTarget.play()}
+                                                    onMouseOut={(e) => { e.currentTarget.pause(); e.currentTarget.currentTime = 0; }}
+                                                />
+                                            ) : (
+                                                <img src={work.image.url} alt={work.title} className="admin-table-thumb" />
+                                            )}
+                                            <div className="admin-thumb-overlay">
+                                                <LuMaximize2 size={20} />
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="admin-table-thumb-placeholder" />
+                                    )}
+                                </td>
                                 <td><strong>{work.title}</strong><br /><small>{work.tags}</small></td>
                                 <td><div className="admin-tags">{work.categories?.filter((c: string) => c !== "All Projects").map((c: string) => <span key={c} className="admin-tag">{c}</span>)}</div></td>
                                 <td><span className={`admin-badge ${work.featured ? "badge-success" : "badge-muted"}`}>{work.featured ? "Yes" : "No"}</span></td>
                                 <td><span className={`admin-badge ${work.isPublished ? "badge-success" : "badge-warning"}`}>{work.isPublished ? "Published" : "Draft"}</span></td>
-                                <td><div className="admin-actions"><button className="admin-btn-icon" onClick={() => handleEdit(work)} title="Edit">✏️</button><button className="admin-btn-icon admin-btn-danger" onClick={() => handleDelete(work._id)} title="Delete">🗑️</button></div></td>
+                                <td>
+                                    <div className="admin-actions">
+                                        <button className="admin-btn-icon" onClick={() => handleEdit(work)} title="Edit">
+                                            <LuPencil size={18} />
+                                        </button>
+                                        <button className="admin-btn-icon admin-btn-danger" onClick={() => handleDelete(work._id)} title="Delete">
+                                            <LuTrash2 size={18} />
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         ))}
                         {works.length === 0 && <tr><td colSpan={6} className="admin-empty-text">No works found. Create your first work!</td></tr>}
                     </tbody>
                 </table>
             </div>
+
+            {/* Image/Video View Popup */}
+            {selectedWorkForView && (
+                <div className="admin-modal-overlay viewer" onClick={() => setSelectedWorkForView(null)}>
+                    <div className="admin-viewer-card" onClick={(e) => e.stopPropagation()}>
+                        <button className="admin-viewer-close" onClick={() => setSelectedWorkForView(null)}><LuX /></button>
+                        <div className="admin-viewer-media">
+                            {selectedWorkForView.image?.mediaType === 'video' ? (
+                                <video src={selectedWorkForView.image.url} controls autoPlay />
+                            ) : (
+                                <img src={selectedWorkForView.image.url} alt={selectedWorkForView.title} />
+                            )}
+                        </div>
+                        <div className="admin-viewer-info">
+                            <h4>{selectedWorkForView.title}</h4>
+                            <p>{selectedWorkForView.client || "No client specified"}</p>
+                            <div className="admin-tags">
+                                {selectedWorkForView.categories?.map((c: string) => (
+                                    <span key={c} className="admin-tag">{c}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

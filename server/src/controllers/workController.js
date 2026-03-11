@@ -115,23 +115,24 @@ const createWork = async (req, res, next) => {
             workData.services = JSON.parse(workData.services);
         }
 
-        // Process main image upload
+        // Process main image/video upload
         if (req.files && req.files.image) {
-            const imageResult = await UploadService.smartProcess(
-                req.files.image[0],
-                'works'
-            );
+            const file = req.files.image[0];
+            const imageResult = await UploadService.smartProcess(file, 'works');
             workData.image = {
                 url: imageResult.url,
                 key: imageResult.key,
                 publicId: imageResult.publicId,
+                mediaType: file.mimetype.startsWith('video/') ? 'video' : 'image',
             };
         } else if (req.file) {
-            const imageResult = await UploadService.smartProcess(req.file, 'works');
+            const file = req.file;
+            const imageResult = await UploadService.smartProcess(file, 'works');
             workData.image = {
                 url: imageResult.url,
                 key: imageResult.key,
                 publicId: imageResult.publicId,
+                mediaType: file.mimetype.startsWith('video/') ? 'video' : 'image',
             };
         }
 
@@ -184,30 +185,31 @@ const updateWork = async (req, res, next) => {
             updateData.services = JSON.parse(updateData.services);
         }
 
-        // Handle image update
+        // Handle media update
         if (req.files && req.files.image) {
+            const file = req.files.image[0];
             // Delete old image
             if (work.image) {
                 await UploadService.deleteFile(work.image);
             }
-            const imageResult = await UploadService.smartProcess(
-                req.files.image[0],
-                'works'
-            );
+            const imageResult = await UploadService.smartProcess(file, 'works');
             updateData.image = {
                 url: imageResult.url,
                 key: imageResult.key,
                 publicId: imageResult.publicId,
+                mediaType: file.mimetype.startsWith('video/') ? 'video' : 'image',
             };
         } else if (req.file) {
+            const file = req.file;
             if (work.image) {
                 await UploadService.deleteFile(work.image);
             }
-            const imageResult = await UploadService.smartProcess(req.file, 'works');
+            const imageResult = await UploadService.smartProcess(file, 'works');
             updateData.image = {
                 url: imageResult.url,
                 key: imageResult.key,
                 publicId: imageResult.publicId,
+                mediaType: file.mimetype.startsWith('video/') ? 'video' : 'image',
             };
         }
 

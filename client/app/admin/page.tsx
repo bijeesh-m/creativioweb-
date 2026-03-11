@@ -21,9 +21,22 @@ export default function AdminPage() {
     const [admin, setAdmin] = useState<any>(null);
     const [currentView, setCurrentView] = useState<AdminView>("dashboard");
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         checkAuth();
+        const handleResize = () => {
+            const mobile = window.innerWidth <= 768;
+            setIsMobile(mobile);
+            if (mobile) {
+                setSidebarOpen(false);
+            } else {
+                setSidebarOpen(true);
+            }
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     const checkAuth = async () => {
@@ -51,6 +64,13 @@ export default function AdminPage() {
         setIsAuthenticated(false);
         setAdmin(null);
         setCurrentView("dashboard");
+    };
+
+    const handleNavigate = (view: AdminView) => {
+        setCurrentView(view);
+        if (isMobile) {
+            setSidebarOpen(false);
+        }
     };
 
     if (isLoading) {
@@ -81,15 +101,22 @@ export default function AdminPage() {
 
     return (
         <div className="admin-layout">
+            {/* Mobile overlay backdrop */}
+            {isMobile && sidebarOpen && (
+                <div
+                    className={`admin-sidebar-overlay ${sidebarOpen ? "visible" : ""}`}
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
             <AdminSidebar
                 currentView={currentView}
-                onNavigate={setCurrentView}
+                onNavigate={handleNavigate}
                 admin={admin}
                 onLogout={handleLogout}
                 isOpen={sidebarOpen}
                 onToggle={() => setSidebarOpen(!sidebarOpen)}
             />
-            <main className={`admin-main ${sidebarOpen ? "" : "sidebar-collapsed"}`}>
+            <main className={`admin-main ${sidebarOpen && !isMobile ? "" : "sidebar-collapsed"}`}>
                 <header className="admin-header">
                     <button className="admin-menu-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>

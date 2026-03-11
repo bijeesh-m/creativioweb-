@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dns = require('dns');
 try {
     dns.setServers(['8.8.8.8', '8.8.4.4']);
+    console.log(process.env.MONGODB_URI);
     console.log('🌐 Using Google DNS for reliable SRV resolution');
 } catch (e) {
     console.log('⚠️ Could not set Google DNS, using system default');

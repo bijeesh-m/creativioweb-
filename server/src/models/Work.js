@@ -36,7 +36,8 @@ const workSchema = new mongoose.Schema(
             trim: true,
         },
         image: {
-            url: { type: String, required: [true, 'Image is required'] },
+            url: { type: String, required: [true, 'Media is required'] },
+            mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
             key: String, // S3 key
             publicId: String, // Cloudinary public ID
         },
