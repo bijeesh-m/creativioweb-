@@ -12,20 +12,22 @@ export default function ServiceDetailContent({ service }: { service: any }) {
                     <div className="order-2 lg:order-1 sticky top-32">
                         <RevealSection animation="slide-left" duration={1000}>
                             <div className="img-zoom aspect-[4/3] rounded-sm overflow-hidden bg-white/5">
-                                <Image
-                                    src={service.heroImage}
-                                    alt={service.title}
-                                    width={800}
-                                    height={600}
-                                    className="w-full h-full object-cover"
-                                    loading="lazy"
-                                />
+                                {(service.heroImage?.url || service.image?.url) && (
+                                    <Image
+                                        src={service.heroImage?.url || service.image?.url}
+                                        alt={service.title}
+                                        width={800}
+                                        height={600}
+                                        className="w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
+                                )}
                             </div>
                         </RevealSection>
 
                         <RevealSection delay={200}>
                             <div className="mt-12 bg-white/5 p-10 rounded-sm space-y-8">
-                                <h3 className="font-serif italic text-2xl text-[#E6F0FF]">
+                                <h3 className="font-sans italic text-2xl text-[#E6F0FF]">
                                     Key Capabilities
                                 </h3>
                                 <ul className="space-y-4">
@@ -47,7 +49,7 @@ export default function ServiceDetailContent({ service }: { service: any }) {
                     <div className="order-1 lg:order-2 space-y-16">
                         <RevealSection animation="slide-right">
                             <h2 className="text-3xl lg:text-5xl font-bold text-[#E6F0FF] leading-tight">
-                                Delivering Impact at <span className="font-serif italic font-normal text-accent">Scale</span>
+                                Delivering Impact at <span className="font-sans italic font-normal text-accent">Scale</span>
                             </h2>
                             <p className="mt-8 text-base text-white/60 leading-relaxed font-sans">
                                 {service.fullDescription}

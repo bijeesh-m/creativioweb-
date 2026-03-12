@@ -32,7 +32,7 @@ export default function SectionHeader({
                 </p>
             )}
             <h2
-                className={`text-3xl sm:text-4xl  lg:text-5xl font- leading-[1.1] -tracking-[0.02em] ${light ? "text-[#E6F0FF]" : "text-navy"
+                className={`text-3xl sm:text-4xl  lg:text-5xl font- leading-[1.1] -tracking-normal ${light ? "text-[#E6F0FF]" : "text-navy"
                     }`}
             >
                 {title}

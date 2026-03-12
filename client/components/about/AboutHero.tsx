@@ -15,11 +15,11 @@ export default function AboutHero() {
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold text-[#E6F0FF] leading-[0.95] tracking-tight max-w-4xl">
                         Redefining the
                         <br />
-                        <span className="font-serif italic font-normal text-white/80">
+                        <span className="font-sans italic font-normal text-white/80">
                             Digital
                         </span>
                         <br />
-                        <span className="font-serif italic font-normal text-white/80">
+                        <span className="font-sans italic font-normal text-white/80">
                             Landscape
                         </span>
                     </h1>

@@ -209,7 +209,7 @@ export default function Navbar() {
                                                     : "translate-y-full opacity-0"
                                                 }`}
                                             style={{
-                                                transition: `transform 0.8s cubic-bezier(0.77, 0, 0.18, 1), opacity 0.6s cubic-bezier(0.77, 0, 0.18, 1), color 0.3s ease`,
+                                                transition: `transform 0.3s cubic-bezier(0.77, 0, 0.18, 1), opacity 0.6s cubic-bezier(0.77, 0, 0.18, 1), color 0.3s ease`,
                                                 transitionDelay: menuOpen && !animatingOut ? enterDelay : exitDelay,
                                             }}
                                         >

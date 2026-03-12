@@ -1,15 +1,58 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { RevealSection } from "@/components/RevealAnimation";
 import SectionHeader from "@/components/SectionHeader";
 import AnimatedPortfolioSection from "./AnimatedPortfolioSection";
-import { projectsData } from "@/data/projects";
-
-// Select first 4 projects as "selected works"
-const selectedProjects = projectsData.slice(0, 4);
+import { api } from "@/lib/api";
 
 export default function PortfolioSection() {
+    const [works, setWorks] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchWorks = async () => {
+            try {
+                // 1. Try to get featured works first
+                let response = await api.getPublicWorks({ featured: 'true', limit: '4' });
+
+                // 2. Fallback to latest works if no featured ones exist
+                if (!response.success || response.data.length === 0) {
+                    response = await api.getPublicWorks({ limit: '4', sort: 'latest' });
+                }
+
+                if (response.success && response.data.length > 0) {
+                    // Map API response to component structure
+                    const mapped = response.data.map((work: any) => ({
+                        title: work.title,
+                        categories: work.categories,
+                        tags: work.tags || work.categories.filter((c: string) => c !== 'All Projects').join(' · '),
+                        image: work.image.url,
+                        mediaType: work.image.mediaType,
+                        tall: work.tall,
+                        slug: work.slug
+                    }));
+                    setWorks(mapped);
+                }
+            } catch (error) {
+                console.error("Failed to fetch works:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchWorks();
+    }, []);
+
+    if (loading) return (
+        <div className="h-screen bg-[#0A0A0A] flex items-center justify-center">
+            <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+        </div>
+    );
+
+    if (works.length === 0) return null;
+
     return (
         <section id="portfolio" aria-label="Creativio digital marketing portfolio and case studies" className="bg-[#0A0A0A]">
             {/* Header */}
@@ -32,7 +75,7 @@ export default function PortfolioSection() {
             </div>
 
             {/* Animated Portfolio */}
-            <AnimatedPortfolioSection selectedProjects={selectedProjects} />
+            <AnimatedPortfolioSection selectedProjects={works} />
 
             {/* CTA */}
             <div className="py-24 lg:py-32 bg-[#0A0A0A]">

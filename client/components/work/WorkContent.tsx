@@ -1,15 +1,63 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { RevealSection } from "@/components/RevealAnimation";
 import WorkMasonryGrid from "./WorkMasonryGrid";
-
-import { categoriesData as categories, projectsData as projects } from "@/data/projects";
+import { api } from "@/lib/api";
 
 export default function WorkContent() {
     const [activeCategory, setActiveCategory] = useState("All Projects");
+    const [projects, setProjects] = useState<any[]>([]);
+    const [categories, setCategories] = useState<string[]>(["All Projects"]);
+    const [loading, setLoading] = useState(true);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [worksRes, catsRes] = await Promise.all([
+                    api.getPublicWorks(),
+                    api.getCategories()
+                ]);
+
+                if (worksRes.success) {
+                    const mappedWorks = worksRes.data.map((work: any) => ({
+                        title: work.title,
+                        categories: work.categories,
+                        tags: work.tags || work.categories.join(' · '),
+                        image: work.image.url,
+                        mediaType: work.image.mediaType,
+                        tall: work.tall,
+                        slug: work.slug
+                    }));
+                    setProjects(mappedWorks);
+                }
+
+                if (catsRes.success) {
+                    const catNames = catsRes.data.map((c: any) => c.name);
+                    if (!catNames.includes("All Projects")) catNames.unshift("All Projects");
+                    setCategories(catNames);
+                } else {
+                    setCategories([
+                        "All Projects",
+                        "Digital Marketing",
+                        "Performance Marketing",
+                        "Branding",
+                        "Video Production",
+                        "CGI and 3D Animation",
+                        "Web Development",
+                    ]);
+                }
+            } catch (error) {
+                console.error("Failed to fetch works data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const scrollFilters = (direction: "left" | "right") => {
         if (scrollContainerRef.current) {
@@ -24,7 +72,15 @@ export default function WorkContent() {
     const filteredProjects =
         activeCategory === "All Projects"
             ? projects
-            : projects.filter((p) => p.categories.includes(activeCategory));
+            : projects.filter((p: any) => p.categories.includes(activeCategory));
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-black flex items-center justify-center">
+                <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+            </div>
+        );
+    }
 
     return (
         <div className="bg-black text-white">
@@ -42,7 +98,7 @@ export default function WorkContent() {
                                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[0.95]">
                                     Our Curated
                                     <br />
-                                    <span className="font-serif italic font-normal text-accent">
+                                    <span className="font-sans italic font-normal text-accent">
                                         Portfolio
                                     </span>
                                 </h1>
@@ -62,7 +118,7 @@ export default function WorkContent() {
             <section className="bg-[#0A0A0A]/95 border-b border-white/10 sticky top-[72px] z-40 backdrop-blur-md">
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative flex items-center">
                     {/* Left Scroll Button (Mobile) */}
-                    <button 
+                    <button
                         onClick={() => scrollFilters("left")}
                         className="md:hidden flex items-center justify-center w-8 h-8 shrink-0 text-white/50 hover:text-white mr-2"
                         aria-label="Scroll categories left"
@@ -70,7 +126,7 @@ export default function WorkContent() {
                         ←
                     </button>
 
-                    <div 
+                    <div
                         ref={scrollContainerRef}
                         className="flex gap-6 overflow-x-auto py-4 flex-1 scrollbar-hide"
                         style={{
@@ -79,7 +135,8 @@ export default function WorkContent() {
                         }}
                     >
                         {/* Add a style tag just for this component to handle webkit scrollbar */}
-                        <style dangerouslySetInnerHTML={{__html: `
+                        <style dangerouslySetInnerHTML={{
+                            __html: `
                             .scrollbar-hide::-webkit-scrollbar {
                                 display: none;
                             }
@@ -89,10 +146,10 @@ export default function WorkContent() {
                                 key={cat}
                                 onClick={(e) => {
                                     setActiveCategory(cat);
-                                    
+
                                     // Scroll category button into center
                                     e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                                    
+
                                     // Scroll page down to the grid
                                     const gridElement = document.getElementById("work-grid");
                                     if (gridElement) {
@@ -112,7 +169,7 @@ export default function WorkContent() {
                     </div>
 
                     {/* Right Scroll Button (Mobile) */}
-                    <button 
+                    <button
                         onClick={() => scrollFilters("right")}
                         className="md:hidden flex items-center justify-center w-8 h-8 shrink-0 text-white/50 hover:text-white ml-2"
                         aria-label="Scroll categories right"
@@ -138,7 +195,7 @@ export default function WorkContent() {
                         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05]">
                             Let&apos;s build something
                             <br />
-                            <span className="font-serif italic font-normal text-accent">
+                            <span className="font-sans italic font-normal text-accent">
                                 together.
                             </span>
                         </h2>

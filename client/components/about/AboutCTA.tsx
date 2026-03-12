@@ -14,7 +14,7 @@ export default function AboutCTA() {
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05]">
                         Ready to shape
                         <br />
-                        <span className="font-serif italic font-normal text-accent">
+                        <span className="font-sans italic font-normal text-accent">
                             the future?
                         </span>
                     </h2>

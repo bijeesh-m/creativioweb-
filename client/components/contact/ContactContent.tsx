@@ -30,7 +30,7 @@ export default function ContactContent() {
                     <RevealSection delay={150} duration={1100}>
                         <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold text-[#E6F0FF] leading-[0.95]">
                             Start a{" "}
-                            <span className="font-serif italic font-normal text-white/80">
+                            <span className="font-sans italic font-normal text-white/80">
                                 Conversation
                             </span>
                         </h1>
@@ -45,7 +45,7 @@ export default function ContactContent() {
                         {/* Left - Contact Info */}
                         <div>
                             <RevealSection animation="slide-left" duration={900}>
-                                <h2 className="font-serif italic text-2xl lg:text-3xl text-[#E6F0FF] mb-6">
+                                <h2 className="font-sans italic text-2xl lg:text-3xl text-[#E6F0FF] mb-6">
                                     Get in Touch
                                 </h2>
                                 <p className="text-sm text-muted leading-relaxed mb-10">
@@ -60,7 +60,7 @@ export default function ContactContent() {
                                         </p>
                                         <a
                                             href="mailto:mail@creativio.in"
-                                            className="text-base font-serif italic text-slate-200 hover:text-accent transition-colors duration-300"
+                                            className="text-base font-sans italic text-slate-200 hover:text-accent transition-colors duration-300"
                                         >
                                             mail@creativio.in
                                         </a>
@@ -72,7 +72,7 @@ export default function ContactContent() {
                                         </p>
                                         <a
                                             href="tel:+919876543210"
-                                            className="text-base font-serif italic text-slate-200 hover:text-accent transition-colors duration-300"
+                                            className="text-base font-sans italic text-slate-200 hover:text-accent transition-colors duration-300"
                                         >
                                             +91 987 654 3210
                                         </a>
@@ -110,7 +110,7 @@ export default function ContactContent() {
                         {/* Right - Form */}
                         <RevealSection animation="slide-right" delay={150} duration={900}>
                             <div className="bg-white/5 rounded-sm p-8 lg:p-12">
-                                <h3 className="font-serif text-2xl lg:text-3xl text-[#E6F0FF] mb-10">
+                                <h3 className="font-sans text-2xl lg:text-3xl text-[#E6F0FF] mb-10">
                                     Send an Inquiry
                                 </h3>
 
@@ -217,7 +217,7 @@ export default function ContactContent() {
                                             id="contact-submit"
                                             className="flex items-center gap-3 group whitespace-nowrap"
                                         >
-                                            <span className="font-serif italic text-xl text-[#E6F0FF] group-hover:text-accent transition-colors duration-300">
+                                            <span className="font-sans italic text-xl text-[#E6F0FF] group-hover:text-accent transition-colors duration-300">
                                                 Send Message
                                             </span>
                                             <span className="inline-block text-[#E6F0FF] group-hover:text-accent group-hover:translate-x-1 transition-all duration-400">

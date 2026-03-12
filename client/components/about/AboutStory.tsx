@@ -36,7 +36,7 @@ export default function AboutStory() {
                     {/* Content */}
                     <div className="lg:pt-12">
                         <RevealSection animation="slide-right" duration={1000}>
-                            <blockquote className="font-serif italic text-xl lg:text-2xl text-[#E6F0FF] leading-relaxed mb-8">
+                            <blockquote className="font-sans italic text-xl lg:text-2xl text-[#E6F0FF] leading-relaxed mb-8">
                                 &ldquo;We don&apos;t just build websites; we craft digital
                                 ecosystems that breathe life into brands.&rdquo;
                             </blockquote>

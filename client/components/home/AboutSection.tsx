@@ -152,7 +152,7 @@ export default function AboutSection() {
                 <div className="mt-32 lg:mt-48">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                         <RevealSection>
-                            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-tighter">
+                            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase">
                                 Our Blueprint <br />
                                 <span className="text-accent/50 italic font-normal">For Success</span>
                             </h2>

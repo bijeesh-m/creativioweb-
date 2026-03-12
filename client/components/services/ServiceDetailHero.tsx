@@ -25,7 +25,7 @@ export default function ServiceDetailHero({ title, description }: ServiceDetailH
                     </RevealSection>
 
                     <RevealSection delay={200}>
-                        <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl font-serif">
+                        <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl font-sans">
                             {description}
                         </p>
                     </RevealSection>

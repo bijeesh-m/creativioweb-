@@ -14,7 +14,7 @@ export default function ServicesHero() {
                 <RevealSection delay={100}>
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[1] tracking-tight max-w-3xl mx-auto">
                         Strategic Solutions for{" "}
-                        <span className="font-serif italic font-normal">Modern Brands</span>
+                        <span className="font-sans italic font-normal">Modern Brands</span>
                     </h1>
                 </RevealSection>
                 <RevealSection delay={200}>

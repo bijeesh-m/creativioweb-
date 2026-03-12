@@ -17,7 +17,7 @@ export default function ServicesSection() {
                             </p>
                         </RevealSection>
                         <RevealSection delay={200}>
-                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#E6F0FF] leading-[1.1] -tracking-[0.02em]">
+                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-sans text-[#E6F0FF] leading-[1.1] -tracking-[0.02em]">
                                 Sophisticated <br className="hidden sm:block" />
                                 <span className="italic opacity-80">Digital Services</span>
                             </h2>
@@ -49,13 +49,13 @@ export default function ServicesSection() {
                                 <div className="absolute inset-0 bg-white/[0.02] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.18,1)] z-0" />
 
                                 <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-12 lg:gap-24 md:w-2/3">
-                                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#E6F0FF] group-hover:text-white transition-colors duration-500 leading-tight">
+                                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-sans text-[#E6F0FF] group-hover:text-white transition-colors duration-500 tracking-wider leading-tight">
                                         {service.title}
                                     </h3>
                                 </div>
 
                                 <div className="relative z-10 flex items-center justify-between md:justify-end md:w-1/3 mt-6 md:mt-0 gap-8">
-                                    <p className="text-sm text-white/50 max-w-[280px] group-hover:text-white/80 transition-colors duration-500 hidden md:block">
+                                    <p className="text-sm text-black/50 max-w-[280px] group-hover:text-white/80 transition-colors duration-500 hidden md:block">
                                         {/* Truncate description to first sentence for a cleaner list look */}
                                         {service.shortDescription.split('.')[0]}.
                                     </p>

@@ -38,7 +38,7 @@ export default function AboutTeam() {
                         </p>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#E6F0FF] leading-[1.1]">
                             Meet the{" "}
-                            <span className="font-serif italic font-normal text-accent">
+                            <span className="font-sans italic font-normal text-accent">
                                 Visionaries
                             </span>
                         </h2>

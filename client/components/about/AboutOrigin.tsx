@@ -18,7 +18,7 @@ export default function AboutOrigin() {
                                 </p>
                                 <h2 className="text-3xl lg:text-4xl font-bold text-[#E6F0FF] leading-tight">
                                     What is{" "}
-                                    <span className="font-serif italic font-normal">Creativio</span>
+                                    <span className="font-sans italic font-normal">Creativio</span>
                                 </h2>
                             </RevealSection>
 

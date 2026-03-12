@@ -1,18 +1,52 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { RevealSection } from "@/components/RevealAnimation";
-import { projectsData } from "@/data/projects";
+import { api } from "@/lib/api";
 
 interface ServiceProjectsProps {
     serviceTitle: string;
 }
 
 export default function ServiceProjects({ serviceTitle }: ServiceProjectsProps) {
-    const filteredProjects = projectsData.filter((project) =>
-        project.categories.includes(serviceTitle)
-    );
+    const [projects, setProjects] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                // Fetch works filtered by the service title category
+                const response = await api.getPublicWorks({ category: serviceTitle });
+                if (response.success) {
+                    const mapped = response.data.map((work: any) => ({
+                        title: work.title,
+                        categories: work.categories,
+                        tags: work.tags || work.categories.join(' · '),
+                        image: work.image.url,
+                        tall: work.tall,
+                        slug: work.slug
+                    }));
+                    setProjects(mapped);
+                }
+            } catch (error) {
+                console.error("Failed to fetch service projects:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, [serviceTitle]);
+
+    if (loading) return null; // Or a subtle loader
+
+    if (projects.length === 0) {
+        return null;
+    }
+
+    const filteredProjects = projects;
 
     if (filteredProjects.length === 0) {
         return null;
@@ -31,7 +65,7 @@ export default function ServiceProjects({ serviceTitle }: ServiceProjectsProps) 
                         <RevealSection delay={150}>
                             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E6F0FF] leading-[1.05]">
                                 Selected{" "}
-                                <span className="font-serif italic font-normal text-accent">
+                                <span className="font-sans italic font-normal text-accent">
                                     Projects
                                 </span>
                             </h2>
@@ -59,7 +93,7 @@ export default function ServiceProjects({ serviceTitle }: ServiceProjectsProps) 
                         >
                             <Link href="/work" className="group block">
                                 <div
-                                    className={`img-zoom rounded-sm overflow-hidden bg-white/5 mb-4 ${project.tall ? "aspect-[3/4]" : "aspect-[4/3]"
+                                    className={`img-zoom rounded-sm overflow-hidden bg-white/5 mb-4 ${project.tall ? "aspect-3/4" : "aspect-4/3"
                                         }`}
                                 >
                                     <Image
@@ -73,7 +107,7 @@ export default function ServiceProjects({ serviceTitle }: ServiceProjectsProps) 
                                 </div>
                                 <div className="flex items-start justify-between">
                                     <div>
-                                        <h3 className="text-lg font-serif italic text-[#E6F0FF] group-hover:text-accent transition-colors duration-400">
+                                        <h3 className="text-lg font-sans italic text-[#E6F0FF] group-hover:text-accent transition-colors duration-400">
                                             {project.title}
                                         </h3>
                                         <p className="text-[11px] tracking-wider uppercase text-muted mt-1">

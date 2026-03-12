@@ -132,6 +132,30 @@ class ApiClient {
         return this.request('/admin/dashboard');
     }
 
+    // Public Services
+    async getPublicServices() {
+        return this.request('/services');
+    }
+
+    async getPublicServiceBySlug(slug: string) {
+        return this.request(`/services/${slug}`);
+    }
+
+    // Public Works
+    async getPublicWorks(params?: Record<string, string>) {
+        const query = params ? '?' + new URLSearchParams(params).toString() : '';
+        return this.request(`/works${query}`);
+    }
+
+    async getPublicWorkBySlug(slug: string) {
+        return this.request(`/works/${slug}`);
+    }
+
+    // Public Clients
+    async getPublicClients() {
+        return this.request('/clients');
+    }
+
     // Works
     async getWorks(params?: Record<string, string>) {
         const query = params ? '?' + new URLSearchParams(params).toString() : '';

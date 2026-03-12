@@ -13,7 +13,7 @@ export default function ServicesCTA() {
                 <RevealSection>
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05]">
                         Start Your{" "}
-                        <span className="font-serif italic font-normal text-accent">
+                        <span className="font-sans italic font-normal text-accent">
                             Project
                         </span>{" "}
                         Today

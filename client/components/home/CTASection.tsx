@@ -17,7 +17,7 @@ export default function CTASection() {
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E6F0FF] leading-[1.05]">
                         Ready to make
                         <br />
-                        <span className="font-serif italic font-normal text-accent">
+                        <span className="font-sans italic font-normal text-accent">
                             history?
                         </span>
                     </h2>

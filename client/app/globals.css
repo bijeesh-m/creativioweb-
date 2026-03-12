@@ -5,7 +5,7 @@
   --color-navy-light: #2d3354;
   --color-cream: #faf8f5;
   --color-cream-dark: #f0ece6;
-  --color-accent: #1DCD9F;
+  --color-accent: #BF94E4;
   --color-accent-light: #d4a96a;
   --color-teal: #4a8b8f;
   --color-teal-dark: #2d6a6e;
@@ -14,12 +14,21 @@
   --color-border: #e5e5e5;
 
   --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-outfit), "Outfit", system-ui, -apple-system, sans-serif;
+  --font-quizlo: "Quizlo", sans-serif;
 }
 
 /* Base styles */
+@font-face {
+  font-family: 'Quizlo';
+  src: url('/Quizlo-DEMO-BF68b930ec7eb9d.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; -- Removed to prevent GSAP conflicts */
 }
 
 body {
@@ -28,6 +37,16 @@ body {
   background-color: #0A0A0A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-quizlo);
+  font-weight: normal;
 }
 
 /* Custom scrollbar */

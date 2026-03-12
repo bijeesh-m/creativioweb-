@@ -4,6 +4,7 @@ const s3Client = require('../config/s3');
 const cloudinary = require('../config/cloudinary');
 const fs = require('fs');
 const path = require('path');
+const sharp = require('sharp');
 
 class UploadService {
     /**
@@ -19,7 +20,28 @@ class UploadService {
 
             // If using local storage (file.path exists)
             if (file.path) {
-                return await this.uploadToCloudinaryFromLocal(file.path, folder);
+                // Resize image if it's an image and not a video/audio
+                const isMedia = file.mimetype.startsWith('video/') || file.mimetype.startsWith('audio/');
+                let processingPath = file.path;
+
+                if (!isMedia && file.mimetype.startsWith('image/')) {
+                    try {
+                        processingPath = await this.resizeImage(file.path);
+                    } catch (resizeError) {
+                        console.error('Image resizing failed, proceeding with original:', resizeError);
+                    }
+                }
+
+                const result = await this.uploadToCloudinaryFromLocal(processingPath, folder);
+
+                // If we created a temporary compressed file, clean it up
+                if (processingPath !== file.path) {
+                    fs.unlink(processingPath, (err) => {
+                        if (err) console.error('Error deleting temp resized file:', err);
+                    });
+                }
+
+                return result;
             }
 
             throw new Error('No file source found');
@@ -34,13 +56,22 @@ class UploadService {
      */
     static async uploadToCloudinaryFromUrl(s3Url, folder, s3Key) {
         try {
-            const result = await cloudinary.uploader.upload(s3Url, {
+            // Check extension if available in s3Key
+            const isVideo = s3Key && s3Key.match(/\.(mp4|mov|avi|wmv|flv|mkv|webm)$/i);
+            const isAudio = s3Key && s3Key.match(/\.(mp3|wav|ogg|m4a|aac)$/i);
+
+            const options = {
                 folder: `creativio/${folder}`,
-                resource_type: 'auto',
-                quality: 'auto:best',
-                fetch_format: 'auto',
-                flags: 'progressive',
-            });
+                resource_type: isVideo || isAudio ? 'video' : 'auto',
+            };
+
+            if (!isVideo && !isAudio) {
+                options.quality = 'auto:best';
+                options.fetch_format = 'auto';
+                options.flags = 'progressive';
+            }
+
+            const result = await cloudinary.uploader.upload(s3Url, options);
 
             return {
                 url: result.secure_url,
@@ -52,6 +83,14 @@ class UploadService {
                 size: result.bytes,
             };
         } catch (error) {
+            // Check for specific Cloudinary "File size too large" error for images
+            if (error.message && error.message.includes('File size too large')) {
+                const s3KeyLower = (s3Key || '').toLowerCase();
+                const isMedia = s3KeyLower.match(/\.(mp4|mov|avi|wmv|flv|mkv|webm|mp3|wav|ogg|m4a|aac)$/i);
+                if (!isMedia) {
+                    error.message = `${error.message} (Note: Cloudinary's free tier limits images to 10MB. Please use a smaller image or a video.)`;
+                }
+            }
             console.error('Cloudinary upload from URL error:', error);
             throw error;
         }
@@ -64,15 +103,16 @@ class UploadService {
         try {
             // Determine if file is a video by extension (case-insensitive)
             const isVideo = filePath.match(/\.(mp4|mov|avi|wmv|flv|mkv|webm)$/i);
+            const isAudio = filePath.match(/\.(mp3|wav|ogg|m4a|aac)$/i);
 
             const options = {
                 folder: `creativio/${folder}`,
-                resource_type: 'auto',
+                resource_type: isVideo || isAudio ? 'video' : 'auto',
             };
 
             // Cloudinary's synchronous transformations fail on videos > 40MB.
             // We only apply these during upload for images.
-            if (!isVideo) {
+            if (!isVideo && !isAudio) {
                 options.quality = 'auto:best';
                 options.fetch_format = 'auto';
                 options.flags = 'progressive';
@@ -81,7 +121,13 @@ class UploadService {
             // Using upload_large to chunk large files safely, wrapped in a promise to handle stream completion
             const result = await new Promise((resolve, reject) => {
                 cloudinary.uploader.upload_large(filePath, options, (error, uploadResult) => {
-                    if (error) return reject(error);
+                    if (error) {
+                        // Check for specific Cloudinary "File size too large" error for images
+                        if (error.message && error.message.includes('File size too large') && !isVideo && !isAudio) {
+                            error.message = `${error.message} (Note: Cloudinary's free tier limits images to 10MB. Please use a smaller image or a video.)`;
+                        }
+                        return reject(error);
+                    }
                     resolve(uploadResult);
                 });
             });
@@ -97,7 +143,7 @@ class UploadService {
 
             // For videos, dynamically insert Cloudinary's optimization flags into the URL
             let finalUrl = result.secure_url || result.url;
-            
+
             if (!finalUrl) {
                 console.error('Cloudinary response missing URL:', result);
                 throw new Error('Cloudinary upload failed: No URL in response');
@@ -120,6 +166,28 @@ class UploadService {
             console.error('Cloudinary upload from local error:', error);
             throw error;
         }
+    }
+
+    /**
+     * Resize and compress image using sharp
+     */
+    static async resizeImage(filePath) {
+        const ext = path.extname(filePath);
+        const dirname = path.dirname(filePath);
+        const basename = path.basename(filePath, ext);
+        const outputPath = path.join(dirname, `${basename}-compressed${ext}`);
+
+        await sharp(filePath)
+            .resize(1920, 1080, {
+                fit: 'inside',
+                withoutEnlargement: true,
+            })
+            .jpeg({ quality: 80, progressive: true, force: false })
+            .png({ quality: 80, progressive: true, force: false })
+            .webp({ quality: 80, force: false })
+            .toFile(outputPath);
+
+        return outputPath;
     }
 
     /**

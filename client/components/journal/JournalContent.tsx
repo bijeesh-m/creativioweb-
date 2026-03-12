@@ -72,7 +72,7 @@ export default function JournalContent() {
                                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#E6F0FF] leading-[0.95]">
                                     Perspectives on
                                     <br />
-                                    <span className="font-serif italic font-normal text-accent">
+                                    <span className="font-sans italic font-normal text-accent">
                                         Design & Future
                                     </span>
                                 </h1>
@@ -118,7 +118,7 @@ export default function JournalContent() {
                                 </div>
                                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-[1.1] max-w-2xl">
                                     Crafting Digital Excellence:{" "}
-                                    <span className="font-serif italic font-normal">
+                                    <span className="font-sans italic font-normal">
                                         The New Era of Luxury UX
                                     </span>
                                 </h2>
@@ -139,7 +139,7 @@ export default function JournalContent() {
                         {/* Sidebar */}
                         <RevealSection animation="slide-left">
                             <div className="lg:sticky lg:top-[100px]">
-                                <h3 className="font-serif italic text-2xl text-[#E6F0FF] mb-5">
+                                <h3 className="font-sans italic text-2xl text-[#E6F0FF] mb-5">
                                     Categories
                                 </h3>
                                 <div className="space-y-2.5">
@@ -169,7 +169,7 @@ export default function JournalContent() {
                                 </div>
 
                                 <div className="mt-10 pt-8 border-t border-border">
-                                    <h3 className="font-serif italic text-xl text-[#E6F0FF] mb-5">
+                                    <h3 className="font-sans italic text-xl text-[#E6F0FF] mb-5">
                                         Trending
                                     </h3>
                                     <div className="space-y-4">
@@ -262,7 +262,7 @@ export default function JournalContent() {
                         </p>
                         <h2 className="text-3xl sm:text-4xl font-bold text-[#E6F0FF]">
                             Join our monthly{" "}
-                            <span className="font-serif italic font-normal">digest</span>
+                            <span className="font-sans italic font-normal">digest</span>
                         </h2>
                     </RevealSection>
 

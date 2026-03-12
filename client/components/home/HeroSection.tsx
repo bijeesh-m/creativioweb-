@@ -77,7 +77,7 @@ export default function HeroSection() {
 
                     {/* Main Title — Responsive sizing */}
                     <RevealSection delay={200} duration={1200}>
-                        <h1 className="text-[2.8rem] sm:text-[4rem] md:text-[5.5rem] lg:text-[8rem] uppercase font-black text-white leading-none lg:leading-[1.2] -tracking-[0.03em]">
+                        <h1 className="text-[2.8rem] sm:text-[4rem] md:text-[5.5rem] lg:text-[8rem] uppercase font-quizlo font-black text-white leading-none lg:leading-[1.2] -tracking-[0.03em]">
                             Scale your<br />
                             <span className="relative inline-block overflow-hidden! h-[1.1em] align-top pr-4">
                                 {/* Invisible word to expand container to max required width */}
@@ -140,7 +140,7 @@ export default function HeroSection() {
                             <Link
                                 href="/contact"
                                 id="hero-start-project"
-                                className="inline-flex items-center px-7 py-3 text-[12px] font-semibold tracking-wider uppercase bg-[#1DCD9F] text-navy rounded-sm hover:bg-white transition-colors duration-300"
+                                className="inline-flex items-center px-7 py-3 text-[12px] font-semibold tracking-wider uppercase bg-accent text-navy rounded-sm hover:bg-white transition-colors duration-300"
                             >
                                 Start a Project
                             </Link>
@@ -163,7 +163,7 @@ export default function HeroSection() {
                             href="/work"
                             className="group flex flex-row items-center gap-2 mt-40"
                         >
-                            <span className="font-serif italic text-[15px] text-white group-hover:text-accent transition-colors">Explore Projects</span>
+                            <span className="font-sans italic text-[15px] text-white group-hover:text-accent transition-colors">Explore Projects</span>
                             <span className="text-xl text-white opacity-80 group-hover:text-accent group-hover:translate-x-1 transition-all">↗</span>
                         </Link>
                     </RevealSection>

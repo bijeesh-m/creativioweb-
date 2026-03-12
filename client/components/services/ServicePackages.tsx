@@ -25,7 +25,7 @@ export default function ServicePackages({ packages }: PackageProps) {
                     <RevealSection delay={150}>
                         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E6F0FF] leading-[1.05]">
                             Development{" "}
-                            <span className="font-serif italic font-normal text-accent">
+                            <span className="font-sans italic font-normal text-accent">
                                 Packages
                             </span>
                         </h2>

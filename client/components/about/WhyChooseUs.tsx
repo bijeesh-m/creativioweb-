@@ -71,7 +71,7 @@ export default function WhyChooseUs() {
                     <RevealSection delay={100}>
                         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight max-w-2xl">
                             What sets us{" "}
-                            <span className="font-serif italic font-normal text-accent">
+                            <span className="font-sans italic font-normal text-accent">
                                 apart
                             </span>
                         </h2>

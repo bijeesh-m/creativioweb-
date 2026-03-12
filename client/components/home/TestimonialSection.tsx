@@ -14,7 +14,7 @@ export default function TestimonialSection() {
                 </RevealSection>
 
                 <RevealSection delay={150} duration={1100}>
-                    <blockquote className="font-serif italic text-2xl sm:text-3xl lg:text-[2.2rem] text-[#E6F0FF] leading-[1.5] lg:leading-[1.55]">
+                    <blockquote className="font-sans italic text-2xl sm:text-3xl lg:text-[2.2rem] text-[#E6F0FF] leading-[1.5] lg:leading-[1.55]">
                         &ldquo;Working with Creativio was a revelation. Their strategic
                         approach to our brand refresh resulted in a{" "}
                         <span className="underline decoration-accent/40 underline-offset-4 text-accent">

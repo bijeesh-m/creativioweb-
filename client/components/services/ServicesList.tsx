@@ -75,7 +75,7 @@ export default function ServicesList() {
                                         href={`/services/${service.id}`}
                                         className="inline-flex items-center gap-3 group whitespace-nowrap"
                                     >
-                                        <span className="font-serif italic text-lg text-[#E6F0FF] group-hover:text-accent transition-colors duration-300">
+                                        <span className="font-sans italic text-lg text-[#E6F0FF] group-hover:text-accent transition-colors duration-300">
                                             Learn More
                                         </span>
                                         <span className="inline-block text-[#E6F0FF] group-hover:text-accent group-hover:translate-x-1 transition-all duration-400">
