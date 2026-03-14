@@ -21,7 +21,7 @@ export default function ContactContent() {
         <>
             {/* Hero */}
             <section className="pt-32 pb-12 lg:pt-40 lg:pb-16 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="mx-auto px-6 lg:px-24">
                     <RevealSection>
                         <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-6">
                             Contact
@@ -40,7 +40,7 @@ export default function ContactContent() {
 
             {/* Contact Info + Form */}
             <section className="pb-20 lg:pb-28 bg-[#0A0A0A] overflow-hidden">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="mx-auto px-6 lg:px-24">
                     <div className="grid lg:grid-cols-[380px_1fr] gap-16 lg:gap-24">
                         {/* Left - Contact Info */}
                         <div>
@@ -91,7 +91,7 @@ export default function ContactContent() {
 
                             {/* Google Maps Embed */}
                             <RevealSection delay={250} className="mt-12">
-                                <div className="aspect-[4/3] rounded-sm overflow-hidden border border-border">
+                                <div className="aspect-4/3 rounded-sm overflow-hidden border border-border">
                                     <iframe
                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3853.098946552763!2d75.8978264749756!3d11.168430889005165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ccd6c9df56f637%3A0xe66c08c62cabfffc!2sCreativio%20Media%20and%20Advertising%20LLP!5e1!3m2!1sen!2sin!4v1773041416940!5m2!1sen!2sin"
                                         width="100%"

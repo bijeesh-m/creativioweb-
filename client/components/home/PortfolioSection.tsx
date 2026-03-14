@@ -57,7 +57,7 @@ export default function PortfolioSection() {
         <section id="portfolio" aria-label="Creativio digital marketing portfolio and case studies" className="bg-[#0A0A0A]">
             {/* Header */}
             <div className="py-24 lg:py-32">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className=" mx-auto px-6 lg:px-24">
                     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                         <SectionHeader
                             eyebrow="Selected Works"
@@ -79,7 +79,7 @@ export default function PortfolioSection() {
 
             {/* CTA */}
             <div className="py-24 lg:py-32 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+                <div className="mx-auto px-6 lg:px-24 text-center">
                     <RevealSection>
                         <Link
                             href="/work"

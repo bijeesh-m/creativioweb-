@@ -249,6 +249,33 @@ class ApiClient {
         return this.request(`/services/admin/${id}`, { method: 'DELETE' });
     }
 
+    // Team
+    async getPublicTeam() {
+        return this.request('/team');
+    }
+
+    async getTeamMembers() {
+        return this.request('/team/admin/all');
+    }
+
+    async createTeamMember(formData: FormData) {
+        return this.request('/team/admin', {
+            method: 'POST',
+            body: formData,
+        });
+    }
+
+    async updateTeamMember(id: string, formData: FormData) {
+        return this.request(`/team/admin/${id}`, {
+            method: 'PUT',
+            body: formData,
+        });
+    }
+
+    async deleteTeamMember(id: string) {
+        return this.request(`/team/admin/${id}`, { method: 'DELETE' });
+    }
+
     // Categories
     async getCategories() {
         return this.request('/categories/admin/all');

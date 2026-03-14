@@ -9,7 +9,7 @@ export default function AboutCTA() {
             <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-accent/5 blur-3xl" />
             <div className="absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-teal/5 blur-3xl" />
 
-            <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+            <div className="relative mx-auto px-6 lg:px-24 text-center">
                 <RevealSection>
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05]">
                         Ready to shape

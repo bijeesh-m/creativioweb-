@@ -11,9 +11,10 @@ import TestimonialsManager from "@/components/admin/TestimonialsManager";
 import ServicesManager from "@/components/admin/ServicesManager";
 import CategoriesManager from "@/components/admin/CategoriesManager";
 import SettingsManager from "@/components/admin/SettingsManager";
+import TeamManagement from "@/components/admin/TeamManagement";
 import "@/styles/admin.css";
 
-type AdminView = "dashboard" | "works" | "clients" | "testimonials" | "services" | "categories" | "settings";
+type AdminView = "dashboard" | "works" | "clients" | "testimonials" | "services" | "categories" | "settings" | "team";
 
 export default function AdminPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -95,6 +96,7 @@ export default function AdminPage() {
             case "services": return <ServicesManager />;
             case "categories": return <CategoriesManager />;
             case "settings": return <SettingsManager />;
+            case "team": return <TeamManagement />;
             default: return <AdminDashboard />;
         }
     };

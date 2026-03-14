@@ -60,7 +60,7 @@ export default function JournalContent() {
         <>
             {/* Hero */}
             <section className="pt-32 pb-8 lg:pt-40 lg:pb-12 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="mx-auto px-6 lg:px-24">
                     <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
                         <div>
                             <RevealSection>
@@ -90,18 +90,18 @@ export default function JournalContent() {
 
             {/* Featured Article */}
             <section className="pb-14 lg:pb-20 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="mx-auto px-6 lg:px-24">
                     <RevealSection duration={1000}>
-                        <div className="relative aspect-[21/9] rounded-sm overflow-hidden bg-white/5 group cursor-pointer">
+                        <div className="relative aspect-21/9 rounded-sm overflow-hidden bg-white/5 group cursor-pointer">
                             <Image
                                 src="/images/blog-featured.png"
                                 alt="Featured article"
                                 fill
-                                className="object-cover group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out"
+                                className="object-cover group-hover:scale-[1.03] transition-transform duration-1200 ease-out"
                                 sizes="100vw"
                                 priority
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
                             <div className="absolute bottom-6 left-6 right-6 lg:bottom-10 lg:left-10">
                                 <div className="flex items-center gap-3 mb-3">
                                     <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent">
@@ -134,7 +134,7 @@ export default function JournalContent() {
 
             {/* Articles Grid */}
             <section className="py-14 lg:py-20 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="mx-auto px-6 lg:px-24">
                     <div className="grid lg:grid-cols-[220px_1fr] gap-12 lg:gap-16">
                         {/* Sidebar */}
                         <RevealSection animation="slide-left">
@@ -148,8 +148,8 @@ export default function JournalContent() {
                                             key={cat}
                                             onClick={() => setActiveCategory(cat)}
                                             className={`block text-[13px] tracking-wide transition-colors duration-300 w-full text-left py-1 ${activeCategory === cat
-                                                    ? "text-[#E6F0FF] font-semibold"
-                                                    : "text-white/60 hover:text-[#E6F0FF]"
+                                                ? "text-[#E6F0FF] font-semibold"
+                                                : "text-white/60 hover:text-[#E6F0FF]"
                                                 }`}
                                         >
                                             <div className="flex items-center justify-between">
@@ -196,7 +196,7 @@ export default function JournalContent() {
                             ).map((article, i) => (
                                 <RevealSection key={article.title} delay={i * 120}>
                                     <article className="group cursor-pointer">
-                                        <div className="img-zoom aspect-[3/2] rounded-sm overflow-hidden bg-white/5 mb-5">
+                                        <div className="img-zoom aspect-3/2 rounded-sm overflow-hidden bg-white/5 mb-5">
                                             <Image
                                                 src={article.image}
                                                 alt={article.title}
@@ -255,7 +255,7 @@ export default function JournalContent() {
 
             {/* Newsletter */}
             <section className="py-20 lg:py-28 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+                <div className="mx-auto px-6 lg:px-24 text-center">
                     <RevealSection>
                         <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-muted mb-4">
                             Stay Inspired

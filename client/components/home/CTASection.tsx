@@ -12,7 +12,7 @@ export default function CTASection() {
             <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-[#FF5A00]/10 blur-3xl mix-blend-screen" />
             <div className="absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-[#E6F0FF]/5 blur-3xl mix-blend-screen" />
 
-            <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="relative mx-auto px-6 lg:px-24">
                 <RevealSection duration={1100}>
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#E6F0FF] leading-[1.05]">
                         Ready to make

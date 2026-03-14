@@ -7,7 +7,7 @@ import { servicesData } from "@/data/services";
 export default function ServicesSection() {
     return (
         <section id="services-overview" aria-label="Digital marketing services by Creativio" className="py-24 lg:py-32 bg-[#0A0A0A] text-white">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 border-b border-white/10 pb-8">
                     {/* Inline custom header to ensure it's dark-mode friendly */}
                     <div>

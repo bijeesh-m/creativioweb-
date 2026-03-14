@@ -354,7 +354,6 @@
 
 .admin-page-title {
     font-size: 1.2rem;
-    font-weight: 700;
     letter-spacing: -0.02em;
     color: var(--admin-text);
 }
@@ -628,7 +627,6 @@
 
 .admin-card-title {
     font-size: 1rem;
-    font-weight: 600;
     margin-bottom: 1rem;
     letter-spacing: -0.01em;
     color: var(--admin-text);

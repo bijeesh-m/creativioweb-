@@ -1,36 +1,54 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { RevealSection } from "@/components/RevealAnimation";
-import SectionHeader from "@/components/SectionHeader";
+import { api } from "@/lib/api";
 
-const team = [
-    {
-        name: "Arjun Nair",
-        role: "Founder & CEO",
-        image: "/images/team-person-1.png",
-    },
-    {
-        name: "Elena Rossi",
-        role: "Creative Director",
-        image: "/images/nova-systems.png",
-    },
-    {
-        name: "David Kim",
-        role: "Tech Lead",
-        image: "/images/future-tech.png",
-    },
-    {
-        name: "Priya Singh",
-        role: "Head of Strategy",
-        image: "/images/testimonial-person.png",
-    },
-];
+interface TeamMember {
+    _id: string;
+    name: string;
+    role: string;
+    image?: {
+        url: string;
+    };
+}
 
 export default function AboutTeam() {
+    const [team, setTeam] = useState<TeamMember[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTeam = async () => {
+            try {
+                const res = await api.getPublicTeam();
+                setTeam(res.data);
+            } catch (err) {
+                console.error("Error fetching team:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchTeam();
+    }, []);
+
+    if (loading) {
+        return (
+            <section className="py-20 bg-[#0A0A0A]">
+                <div className="mx-auto px-6 lg:px-24 text-center text-white/50">
+                    Loading team...
+                </div>
+            </section>
+        );
+    }
+
+    if (team.length === 0) {
+        return null;
+    }
+
     return (
         <section aria-label="Creativio team members" className="py-20 lg:py-28 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
                     <RevealSection>
                         <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-white/50 mb-4">
@@ -53,11 +71,11 @@ export default function AboutTeam() {
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     {team.map((member, i) => (
-                        <RevealSection key={member.name} delay={i * 120}>
+                        <RevealSection key={member._id} delay={i * 120}>
                             <div className="group cursor-pointer">
-                                <div className="img-zoom aspect-[3/4] rounded-sm overflow-hidden bg-white/5 mb-4">
+                                <div className="img-zoom aspect-3/4 rounded-sm overflow-hidden bg-white/5 mb-4">
                                     <Image
-                                        src={member.image}
+                                        src={member.image?.url || "/images/team-person-1.png"}
                                         alt={`${member.name} - ${member.role} at Creativio digital marketing agency`}
                                         width={400}
                                         height={533}

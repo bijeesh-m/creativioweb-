@@ -86,7 +86,7 @@ export default function WorkContent() {
         <div className="bg-black text-white">
             {/* Hero */}
             <section className="pt-32 pb-8 lg:pt-40 lg:pb-12 bg-[#0A0A0A]">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+                <div className="mx-auto px-6 lg:px-24">
                     <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
                         <div>
                             <RevealSection>
@@ -115,8 +115,8 @@ export default function WorkContent() {
             </section>
 
             {/* Filters */}
-            <section className="bg-[#0A0A0A]/95 border-b border-white/10 sticky top-[72px] z-40 backdrop-blur-md">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative flex items-center">
+            <section className="bg-[#0A0A0A]/95 border-b border-white/10 sticky top-[96px] z-40 backdrop-blur-md">
+                <div className="mx-auto px-6 lg:px-24 relative flex items-center">
                     {/* Left Scroll Button (Mobile) */}
                     <button
                         onClick={() => scrollFilters("left")}
@@ -187,7 +187,7 @@ export default function WorkContent() {
             {/* CTA */}
             <section className="relative py-24 lg:py-32 bg-[#0A0A0A] overflow-hidden">
                 <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-accent/5 blur-3xl" />
-                <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+                <div className="relative mx-auto px-6 lg:px-24 text-center">
                     <RevealSection>
                         <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-white/40 mb-6">
                             Start Your Journey

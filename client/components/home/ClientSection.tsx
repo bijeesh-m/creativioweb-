@@ -29,7 +29,7 @@ export default function ClientSection() {
     <section className="py-24 bg-transparent overflow-hidden border-t border-b border-white/10 relative">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px] pointer-events-none opacity-50" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-24 mb-16 relative z-10">
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
@@ -53,12 +53,12 @@ export default function ClientSection() {
           {clients.map((client, index) => (
             <div
               key={`client-1-${index}`}
-              className="flex items-center justify-center mx-6 sm:mx-10 md:mx-20 text-white/40 hover:text-white hover:scale-110 transition-all duration-500 cursor-pointer"
+              className="flex items-center justify-center mx-8 sm:mx-12 md:mx-24 text-white/40 hover:text-white hover:scale-110 transition-all duration-500 cursor-pointer"
             >
               <img
                 src={client.logo.url}
                 alt={client.name}
-                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain filter grayscale brightness-200 hover:grayscale-0 transition-all duration-500"
+                className="w-auto h-16 sm:h-20 md:h-28 lg:h-36 max-w-[200px] sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] object-contain filter grayscale brightness-200 hover:grayscale-0 transition-all duration-500"
                 title={client.name}
               />
             </div>
@@ -67,12 +67,12 @@ export default function ClientSection() {
           {clients.map((client, index) => (
             <div
               key={`client-2-${index}`}
-              className="flex items-center justify-center mx-6 sm:mx-10 md:mx-20 text-white/40 hover:text-white hover:scale-110 transition-all duration-500 cursor-pointer"
+              className="flex items-center justify-center mx-8 sm:mx-12 md:mx-24 text-white/40 hover:text-white hover:scale-110 transition-all duration-500 cursor-pointer"
             >
               <img
                 src={client.logo.url}
                 alt={client.name}
-                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain filter grayscale brightness-200 hover:grayscale-0 transition-all duration-500"
+                className="w-auto h-16 sm:h-20 md:h-28 lg:h-36 max-w-[200px] sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px] object-contain filter grayscale brightness-200 hover:grayscale-0 transition-all duration-500"
                 title={client.name}
               />
             </div>

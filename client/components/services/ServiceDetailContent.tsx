@@ -6,12 +6,12 @@ import { RevealSection } from "@/components/RevealAnimation";
 export default function ServiceDetailContent({ service }: { service: any }) {
     return (
         <section className="py-20 lg:py-32 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
                     {/* Visual Side */}
                     <div className="order-2 lg:order-1 sticky top-32">
                         <RevealSection animation="slide-left" duration={1000}>
-                            <div className="img-zoom aspect-[4/3] rounded-sm overflow-hidden bg-white/5">
+                            <div className="img-zoom aspect-4/3 rounded-sm overflow-hidden bg-white/5">
                                 {(service.heroImage?.url || service.image?.url) && (
                                     <Image
                                         src={service.heroImage?.url || service.image?.url}

@@ -27,7 +27,7 @@ const values = [
 export default function AboutValues() {
     return (
         <section className="py-20 lg:py-28 bg-transparent">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="grid lg:grid-cols-[300px_1fr] gap-16">
                     <SectionHeader title="Our Core" titleAccent="Values" light />
 
@@ -35,7 +35,7 @@ export default function AboutValues() {
                         {values.map((value, i) => (
                             <RevealSection key={value.title} delay={i * 150}>
                                 <div className="flex gap-6 items-start group">
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#E6F0FF] group-hover:bg-[#FF5A00] group-hover:text-white transition-all duration-300 shadow-sm">
+                                    <div className="shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#E6F0FF] group-hover:bg-accent group-hover:text-black transition-all duration-300 shadow-sm">
                                         <span className="text-sm">{value.icon}</span>
                                     </div>
                                     <div>

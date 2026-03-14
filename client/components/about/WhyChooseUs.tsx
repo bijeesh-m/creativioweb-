@@ -57,10 +57,10 @@ export default function WhyChooseUs() {
     return (
         <section aria-label="Why choose Creativio digital marketing agency" className="relative py-24 lg:py-32 bg-[#0A0A0A] overflow-hidden">
             {/* Ambient background glow effects */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-accent/[0.04] blur-[120px]" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-teal/[0.06] blur-[100px]" />
+            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-accent/4 blur-[120px]" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-teal/6 blur-[100px]" />
 
-            <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="relative mx-auto px-6 lg:px-24">
                 {/* Header */}
                 <div className="mb-16 lg:mb-20">
                     <RevealSection>
@@ -86,20 +86,20 @@ export default function WhyChooseUs() {
                 </div>
 
                 {/* Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[1px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px">
                     {reasons.map((reason, i) => (
                         <RevealSection key={reason.title} delay={i * 120}>
-                            <div className="group relative h-full p-8 lg:p-10 bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm hover:bg-white/[0.08] transition-all duration-500 cursor-default">
+                            <div className="group relative h-full p-8 lg:p-10 bg-white/3 border border-white/6 backdrop-blur-sm hover:bg-white/8 transition-all duration-500 cursor-default">
                                 {/* Top accent line on hover */}
-                                <div className="absolute top-0 left-0 w-0 h-[2px] bg-gradient-to-r from-accent to-accent-light group-hover:w-full transition-all duration-700 ease-out" />
+                                <div className="absolute top-0 left-0 w-0 h-[2px] bg-linear-to-r from-accent to-accent-light group-hover:w-full transition-all duration-700 ease-out" />
 
                                 {/* Number watermark */}
-                                <span className="absolute top-6 right-8 text-[64px] font-bold text-white/[0.03] leading-none select-none group-hover:text-white/[0.06] transition-colors duration-500">
+                                <span className="absolute top-6 right-8 text-[64px] font-bold text-white/3 leading-none select-none group-hover:text-white/6 transition-colors duration-500">
                                     {reason.number}
                                 </span>
 
                                 {/* Icon */}
-                                <div className="relative w-14 h-14 rounded-full bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-accent mb-8 group-hover:bg-accent/10 group-hover:border-accent/20 transition-all duration-500">
+                                <div className="relative w-14 h-14 rounded-full bg-white/5 border border-white/8 flex items-center justify-center text-accent mb-8 group-hover:bg-accent/10 group-hover:border-accent/20 transition-all duration-500">
                                     {reason.icon}
                                 </div>
 

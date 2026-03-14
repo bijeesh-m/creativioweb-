@@ -15,15 +15,15 @@ export default function HeroSection() {
         }, 2500);
         return () => clearInterval(interval);
     }, []);
-
     return (
         <section
             id="hero"
+
             aria-label="Creativio - Best Digital Marketing Agency in Calicut and Malappuram"
             className="relative  min-h-[100svh] flex items-center overflow-hidden bg-[#0A0A0A]"
         >
             {/* Background Image Container — Desktop: right-aligned overlap, Mobile: full bottom with gradient */}
-            <div className="absolute inset-0 md:inset-y-0 md:right-0 md:left-auto md:w-[70%] z-0">
+            <div className="absolute inset-0 md:inset-y-0 md:right-0 md:left-auto z-0">
                 <RevealSection
                     animation="scale-in"
                     delay={200}
@@ -55,7 +55,7 @@ export default function HeroSection() {
                 <div className="hidden md:block absolute left-0 right-0 bottom-0 h-32 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent z-10" />
             </div>
 
-            <div className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-12 pt-28 pb-16 md:pt-[18vh] md:pb-[12vh] w-full min-h-[100svh] flex flex-col justify-end md:justify-center">
+            <div className="relative z-20  mx-auto px-6 lg:px-24 pt-28 pb-16 md:pt-[18vh] md:pb-[12vh] w-full min-h-[100svh] flex flex-col justify-end md:justify-center">
                 {/* Left rotated text (EST. 2024 - GLOBAL) — Desktop only */}
                 <div className="hidden lg:block absolute left-12 top-1/2 -translate-y-1/2">
                     <div className="-rotate-90 origin-left whitespace-nowrap">
@@ -67,17 +67,17 @@ export default function HeroSection() {
                     </div>
                 </div>
 
-                <div className="max-w-[1000px] lg:pl-[120px]">
+                <div className=" ">
                     {/* Eyebrow — Mobile visible */}
                     <RevealSection delay={100}>
-                        <p className="text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-4 md:mb-6">
+                        <p className="text-[10px]  sm:text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-4 md:mb-6">
                             Digital Marketing Agency · Calicut
                         </p>
                     </RevealSection>
 
                     {/* Main Title — Responsive sizing */}
                     <RevealSection delay={200} duration={1200}>
-                        <h1 className="text-[2.8rem] sm:text-[4rem] md:text-[5.5rem] lg:text-[8rem] uppercase font-quizlo font-black text-white leading-none lg:leading-[1.2] -tracking-[0.03em]">
+                        <h1 className="text-[2.8rem]  sm:text-[4rem] md:text-[5.5rem] lg:text-[8rem] uppercase font-quizlo font-black text-white leading-none lg:leading-[1.2] -tracking-[0.03em]">
                             Scale your<br />
                             <span className="relative inline-block overflow-hidden! h-[1.1em] align-top pr-4">
                                 {/* Invisible word to expand container to max required width */}
@@ -140,7 +140,7 @@ export default function HeroSection() {
                             <Link
                                 href="/contact"
                                 id="hero-start-project"
-                                className="inline-flex items-center px-7 py-3 text-[12px] font-semibold tracking-wider uppercase bg-accent text-navy rounded-sm hover:bg-white transition-colors duration-300"
+                                className="inline-flex items-center px-7 py-3 text-[12px] font-semibold tracking-wider uppercase bg-accent rounded-sm hover:bg-white hover:text-black transition-colors duration-300"
                             >
                                 Start a Project
                             </Link>

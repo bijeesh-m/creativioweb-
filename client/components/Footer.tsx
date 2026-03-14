@@ -17,7 +17,7 @@ const socialLinks = [
 export default function Footer() {
     return (
         <footer className="bg-cream border-t border-border" id="footer">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 lg:py-20">
+            <div className="mx-auto px-6 lg:px-24 py-16 lg:py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                     {/* Brand */}
                     <div className="lg:col-span-1">
@@ -105,7 +105,7 @@ export default function Footer() {
 
             {/* Bottom Bar */}
             <div className="border-t border-border">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <div className="mx-auto px-6 lg:px-24 py-5 flex flex-col sm:flex-row justify-between items-center gap-3">
                     <p className="text-[12px] text-muted tracking-wide uppercase">
                         © {new Date().getFullYear()} Creativio Media & Advertising. All Rights Reserved.
                     </p>

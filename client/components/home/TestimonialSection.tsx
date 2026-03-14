@@ -6,7 +6,7 @@ import { RevealSection } from "@/components/RevealAnimation";
 export default function TestimonialSection() {
     return (
         <section id="testimonials" className="py-28 lg:py-36 bg-[#0A0A0A] border-t border-white/5 border-b">
-            <div className="max-w-[900px] mx-auto px-6 lg:px-12 text-center">
+            <div className="max-w-5xl mx-auto px-6 lg:px-24 text-center">
                 <RevealSection>
                     <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-12">
                         What Our Clients Say

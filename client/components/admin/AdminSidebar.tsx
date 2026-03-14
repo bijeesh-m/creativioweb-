@@ -10,7 +10,7 @@ import {
     LuLogOut
 } from "react-icons/lu";
 
-type AdminView = "dashboard" | "works" | "clients" | "testimonials" | "services" | "categories" | "settings";
+type AdminView = "dashboard" | "works" | "clients" | "testimonials" | "services" | "categories" | "settings" | "team";
 
 interface Props {
     currentView: AdminView;
@@ -28,6 +28,7 @@ const navItems: { key: AdminView; label: string; icon: any }[] = [
     { key: "testimonials", label: "Testimonials", icon: LuMessageSquare },
     { key: "services", label: "Services", icon: LuServer },
     { key: "categories", label: "Categories", icon: LuTag },
+    { key: "team", label: "Team", icon: LuUsers },
     { key: "settings", label: "Settings", icon: LuSettings },
 ];
 

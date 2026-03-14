@@ -81,13 +81,13 @@ export default function AboutSection() {
             id="about"
             className="relative bg-[#0A0A0A] py-24 lg:py-40 overflow-hidden"
         >
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className=" mx-auto px-6 lg:px-24">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
                     {/* Image Column */}
                     <div className="lg:col-span-5 relative">
                         <div
                             ref={imageContainerRef}
-                            className="relative aspect-4/5 overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700"
+                            className="relative aspect-5/5 overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-700"
                         >
                             <Image
                                 src="/images/about-premium.png"

@@ -7,7 +7,7 @@ import { RevealSection } from "@/components/RevealAnimation";
 export default function AboutOrigin() {
     return (
         <section aria-label="About Creativio - Digital Marketing Agency" className="py-20 lg:py-28 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="bg-white/5 border border-white/10 rounded-sm p-8 lg:p-14">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         {/* Content */}
@@ -44,7 +44,7 @@ export default function AboutOrigin() {
                         {/* Images */}
                         <RevealSection animation="slide-right" delay={200}>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="aspect-[3/4] rounded-sm overflow-hidden bg-white/5">
+                                <div className="aspect-3/4 rounded-sm overflow-hidden bg-white/5">
                                     <Image
                                         src="/images/azure-heights.png"
                                         alt="Creativio digital marketing agency workspace in Calicut"
@@ -54,7 +54,7 @@ export default function AboutOrigin() {
                                         loading="lazy"
                                     />
                                 </div>
-                                <div className="aspect-[3/4] rounded-sm overflow-hidden bg-white/5 mt-8">
+                                <div className="aspect-3/4 rounded-sm overflow-hidden bg-white/5 mt-8">
                                     <Image
                                         src="/images/lusso-living.png"
                                         alt="Creativio creative team work environment in Kerala"

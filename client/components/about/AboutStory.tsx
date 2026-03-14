@@ -12,11 +12,11 @@ const stats = [
 export default function AboutStory() {
     return (
         <section aria-label="Creativio story and achievements" className="py-20 lg:py-28 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
                     {/* Image */}
                     <RevealSection animation="slide-left" duration={1000}>
-                        <div className="relative aspect-[3/4] rounded-sm overflow-hidden bg-white/5">
+                        <div className="relative aspect-3/4 rounded-sm overflow-hidden bg-white/5">
                             <Image
                                 src="/images/about-3d-art.png"
                                 alt="Creativio creative digital marketing and branding concept art"

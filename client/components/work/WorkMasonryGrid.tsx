@@ -21,7 +21,7 @@ export default function WorkMasonryGrid({ projects = [], activeCategory = "All" 
 
     return (
         <section className="py-20 lg:py-32 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="columns-1 md:columns-2 gap-6 lg:gap-8 space-y-6 lg:space-y-8">
                     {projects.map((project, index) => (
                         <RevealSection

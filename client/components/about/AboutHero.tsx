@@ -5,7 +5,7 @@ import { RevealSection } from "@/components/RevealAnimation";
 export default function AboutHero() {
     return (
         <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <RevealSection>
                     <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-6">
                         Our Essence

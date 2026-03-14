@@ -32,7 +32,7 @@ const articles = [
 export default function InsightsSection() {
     return (
         <section id="insights" className="py-24 lg:py-32 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className=" mx-auto px-6 lg:px-24">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
                     <SectionHeader eyebrow="Journal" title="Latest Insights" light />
                     <RevealSection delay={200}>

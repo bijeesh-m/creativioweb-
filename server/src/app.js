@@ -16,6 +16,7 @@ const settingRoutes = require('./routes/settingRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const teamRoutes = require('./routes/teamRoutes');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -83,6 +84,7 @@ app.use('/api/settings', settingRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/admin/dashboard', dashboardRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/team', teamRoutes);
 
 // ===================== Health Check =====================
 app.get('/api/health', (req, res) => {

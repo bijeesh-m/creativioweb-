@@ -15,7 +15,7 @@ interface PackageProps {
 export default function ServicePackages({ packages }: PackageProps) {
     return (
         <section className="py-24 lg:py-32 bg-[#0A0A0A] border-t border-white/10">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="text-center mb-16 lg:mb-24">
                     <RevealSection>
                         <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-4">
@@ -52,8 +52,8 @@ export default function ServicePackages({ packages }: PackageProps) {
                                     </p>
                                 </div>
 
-                                <div className="flex-grow relative z-10">
-                                    <div className="h-[1px] w-full bg-white/10 mb-8" />
+                                <div className="grow relative z-10">
+                                    <div className="h-px w-full bg-white/10 mb-8" />
                                     <ul className="space-y-4 mb-8">
                                         {pkg.features.map((feat) => (
                                             <li key={feat} className="flex items-start gap-3">

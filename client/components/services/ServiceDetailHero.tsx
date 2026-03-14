@@ -10,7 +10,7 @@ interface ServiceDetailHeroProps {
 export default function ServiceDetailHero({ title, description }: ServiceDetailHeroProps) {
     return (
         <section className="pt-32 pb-16 lg:pt-40 lg:pb-24 bg-[#0A0A0A]">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="mx-auto px-6 lg:px-24">
                 <div className="max-w-4xl">
                     <RevealSection>
                         <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-accent mb-6">

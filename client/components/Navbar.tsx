@@ -3,6 +3,14 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+    FaInstagram,
+    FaLinkedinIn,
+    FaBehance,
+    FaXTwitter,
+    FaFacebookF,
+    FaYoutube
+} from "react-icons/fa6";
 
 const navLinks = [
     { label: "Home", href: "/", number: "01" },
@@ -11,6 +19,16 @@ const navLinks = [
     { label: "About", href: "/about", number: "04" },
     { label: "Journal", href: "/journal", number: "05" },
     { label: "Contact", href: "/contact", number: "06" },
+];
+
+
+const socialLinks = [
+    { name: "Instagram", href: "https://www.instagram.com/creativio.media", icon: FaInstagram },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/creativio-media-8943182a3/", icon: FaLinkedinIn },
+    { name: "Behance", href: "https://www.behance.net/creativiomedia", icon: FaBehance },
+    { name: "Twitter", href: "https://x.com/crativio34269", icon: FaXTwitter },
+    { name: "Facebook", href: "https://www.facebook.com/creativio.medio/", icon: FaFacebookF },
+    { name: "Youtube", href: "https://www.youtube.com/@CreativioMedia", icon: FaYoutube },
 ];
 
 export default function Navbar() {
@@ -78,17 +96,16 @@ export default function Navbar() {
         <>
             {/* Fixed Header Bar */}
             <header
-                className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${
-                    menuOpen
-                        ? "bg-[#0A0A0A]"
-                        : scrolled
-                            ? isHomePage || isDarkTheme
-                                ? "bg-[#0A0A0A]/90 backdrop-blur-md border-b border-white/5"
-                                : "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]"
-                            : "bg-transparent"
+                className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-500 ${menuOpen
+                    ? "bg-[#0A0A0A]"
+                    : scrolled
+                        ? isHomePage || isDarkTheme
+                            ? "bg-[#0A0A0A]/90 backdrop-blur-md border-b border-white/5"
+                            : "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]"
+                        : "bg-transparent"
                     }`}
             >
-                <nav className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between h-[72px]">
+                <nav className=" mx-auto px-6 lg:px-24 flex items-center justify-between h-[100px]">
                     {/* Logo */}
                     <Link
                         href="/"
@@ -96,7 +113,7 @@ export default function Navbar() {
                         id="nav-logo"
                     >
                         <div
-                            className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-semibold transition-all duration-500 ${menuOpen
+                            className={`w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 rounded-full border-2 flex items-center justify-center text-xs lg:text-sm xl:text-base font-semibold transition-all duration-500 ${menuOpen
                                 ? "border-[#E6F0FF] text-[#E6F0FF] group-hover:bg-[#E6F0FF] group-hover:text-[#0A0A0A]"
                                 : isDarkTheme
                                     ? "border-[#E6F0FF] text-[#E6F0FF] group-hover:bg-[#E6F0FF] group-hover:text-[#0A0A0A]"
@@ -106,7 +123,7 @@ export default function Navbar() {
                             c
                         </div>
                         <span
-                            className={`text-lg font-semibold tracking-tight transition-colors duration-500 ${menuOpen
+                            className={`text-lg lg:text-xl font-semibold tracking-tight transition-colors duration-500 ${menuOpen
                                 ? "text-[#E6F0FF]"
                                 : isDarkTheme
                                     ? "text-[#E6F0FF]"
@@ -125,7 +142,7 @@ export default function Navbar() {
                         id="menu-toggle"
                     >
                         <span
-                            className={`text-[11px] font-semibold tracking-[0.2em] uppercase transition-colors duration-500 ${menuOpen && !animatingOut
+                            className={`text-[11px] lg:text-[13px] xl:text-[14px] font-semibold tracking-[0.2em] uppercase transition-colors duration-500 ${menuOpen && !animatingOut
                                 ? "text-[#E6F0FF]/70"
                                 : isDarkTheme
                                     ? "text-[#E6F0FF]/70"
@@ -178,7 +195,7 @@ export default function Navbar() {
                 />
 
                 {/* Navigation Content */}
-                <div className="relative h-full flex flex-col justify-start lg:justify-center max-w-[1400px] mx-auto px-6 lg:px-12 pt-[100px] pb-12 lg:pt-0 lg:pb-0 overflow-y-auto no-scrollbar">
+                <div className="relative h-full flex flex-col justify-start lg:justify-center mx-auto px-6 lg:px-24 pt-[100px] pb-12 lg:pt-0 lg:pb-0 overflow-y-auto no-scrollbar">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-24 min-h-min">
                         {/* Main Nav Links */}
                         <nav className="flex flex-col gap-1 lg:gap-2" aria-label="Main navigation">
@@ -209,8 +226,7 @@ export default function Navbar() {
                                                     : "translate-y-full opacity-0"
                                                 }`}
                                             style={{
-                                                transition: `transform 0.3s cubic-bezier(0.77, 0, 0.18, 1), opacity 0.6s cubic-bezier(0.77, 0, 0.18, 1), color 0.3s ease`,
-                                                transitionDelay: menuOpen && !animatingOut ? enterDelay : exitDelay,
+                                                transition: ` transform 0.3s cubic-bezier(0.77, 0, 0.18, 1), opacity 0.6s cubic-bezier(0.77, 0, 0.18, 1), color 0.3s ease`,
                                             }}
                                         >
                                             {link.label}
@@ -232,7 +248,7 @@ export default function Navbar() {
 
                         {/* Right Side Info */}
                         <div
-                            className={`flex flex-col gap-10 lg:gap-12 lg:max-w-[300px] transition-all duration-700 ${menuOpen && !animatingOut
+                            className={`flex flex-col gap-10 lg:gap-16 xl:gap-20 lg:max-w-[400px] transition-all duration-700 ${menuOpen && !animatingOut
                                 ? "translate-y-0 opacity-100"
                                 : "translate-y-6 opacity-0"
                                 }`}
@@ -242,37 +258,40 @@ export default function Navbar() {
                         >
                             {/* Contact Info */}
                             <div>
-                                <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-accent mb-4">
+                                <p className="text-[10px] lg:text-[12px] xl:text-[14px] font-semibold tracking-[0.25em] uppercase text-accent mb-4">
                                     Get in Touch
                                 </p>
                                 <a
                                     href="mailto:mail@creativio.in"
-                                    className="block text-sm text-[#E6F0FF]/50 hover:text-[#E6F0FF] transition-colors duration-300 mb-2"
+                                    className="block text-sm lg:text-base xl:text-xl text-[#E6F0FF]/50 hover:text-[#E6F0FF] transition-colors duration-300 mb-2"
                                 >
                                     mail@creativio.in
                                 </a>
                                 <a
                                     href="tel:+919876543210"
-                                    className="block text-sm text-[#E6F0FF]/50 hover:text-[#E6F0FF] transition-colors duration-300"
+                                    className="block text-sm lg:text-base xl:text-xl text-[#E6F0FF]/50 hover:text-[#E6F0FF] transition-colors duration-300"
                                 >
-                                    +91 987 654 3210
+                                    04832082598
                                 </a>
                             </div>
 
                             {/* Social Links */}
                             <div>
-                                <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-accent mb-4">
+                                <p className="text-[10px] lg:text-[12px] xl:text-[14px] font-semibold tracking-[0.25em] uppercase text-accent mb-4">
                                     Follow Us
                                 </p>
-                                <div className="flex gap-6">
-                                    {["Instagram", "LinkedIn", "Behance"].map(
+                                <div className="flex flex-wrap gap-5">
+                                    {socialLinks.map(
                                         (social) => (
                                             <a
-                                                key={social}
-                                                href="#"
-                                                className="text-sm text-[#E6F0FF]/40 hover:text-[#E6F0FF] transition-colors duration-300"
+                                                key={social.name}
+                                                href={social.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-white/5 text-[#E6F0FF]/40 hover:text-accent hover:bg-white/10 transition-all duration-300"
+                                                aria-label={social.name}
                                             >
-                                                {social}
+                                                <social.icon className="text-lg lg:text-xl xl:text-2xl" />
                                             </a>
                                         )
                                     )}
@@ -281,13 +300,11 @@ export default function Navbar() {
 
                             {/* Location */}
                             <div>
-                                <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-accent mb-3">
+                                <p className="text-[10px] lg:text-[12px] xl:text-[14px] font-semibold tracking-[0.25em] uppercase text-accent mb-3">
                                     Located in
                                 </p>
-                                <p className="text-sm text-[#E6F0FF]/40 leading-relaxed">
-                                    Calicut & Malappuram
-                                    <br />
-                                    Kerala, India
+                                <p className="text-sm lg:text-base xl:text-lg text-[#E6F0FF]/40 leading-relaxed">
+                                    Near Calicut Airport, Kinfra Park Road, Vennayoor, Ayikkarapadi P.O, Malappuram Dt - 673637
                                 </p>
                             </div>
                         </div>

@@ -110,6 +110,13 @@ export default function RootLayout({
           }}
         />
         <LayoutShell>{children}</LayoutShell>
+        <svg className="hidden">
+          <filter id="grainy-noise">
+            <feTurbulence type="turbulence" baseFrequency="0.7" numOctaves="4" result="noise" />
+            <feColorMatrix type="saturate" values="0" />
+            <feBlend in="SourceGraphic" in2="noise" mode="multiply" />
+          </filter>
+        </svg>
       </body>
     </html>
   );
