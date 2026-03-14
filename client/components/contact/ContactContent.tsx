@@ -71,10 +71,10 @@ export default function ContactContent() {
                                             Phone
                                         </p>
                                         <a
-                                            href="tel:+919876543210"
+                                            href="tel:04832082598"
                                             className="text-base font-sans italic text-slate-200 hover:text-accent transition-colors duration-300"
                                         >
-                                            +91 987 654 3210
+                                            04832082598
                                         </a>
                                     </div>
 

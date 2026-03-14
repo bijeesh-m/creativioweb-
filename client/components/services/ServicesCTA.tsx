@@ -6,7 +6,7 @@ import { RevealSection } from "@/components/RevealAnimation";
 export default function ServicesCTA() {
     return (
         <section className="relative py-28 lg:py-36 bg-[#0A0A0A] overflow-hidden">
-            <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-teal/5 blur-3xl" />
+            <div className="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-accent/5 blur-3xl" />
             <div className="absolute -left-20 -bottom-20 w-72 h-72 rounded-full bg-accent/5 blur-3xl" />
 
             <div className="relative mx-auto px-6 lg:px-24 text-center">
@@ -31,7 +31,7 @@ export default function ServicesCTA() {
                     <Link
                         href="/contact"
                         id="services-cta"
-                        className="inline-flex items-center px-8 py-3.5 text-[13px] font-semibold tracking-wider uppercase bg-teal text-white rounded-sm hover:bg-teal-dark transition-all duration-300"
+                        className="inline-flex items-center px-8 py-3.5 text-[13px] font-semibold tracking-wider uppercase bg-accent text-white rounded-sm hover:bg-accent-dark transition-all duration-300"
                     >
                         Get in Touch
                     </Link>

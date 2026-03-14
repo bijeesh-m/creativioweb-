@@ -268,7 +268,7 @@ export default function Navbar() {
                                     mail@creativio.in
                                 </a>
                                 <a
-                                    href="tel:+919876543210"
+                                    href="tel:04832082598"
                                     className="block text-sm lg:text-base xl:text-xl text-[#E6F0FF]/50 hover:text-[#E6F0FF] transition-colors duration-300"
                                 >
                                     04832082598
