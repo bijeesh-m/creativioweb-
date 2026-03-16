@@ -8,6 +8,7 @@ const getWorks = async (req, res, next) => {
     try {
         const {
             category,
+            service,
             featured,
             page = 1,
             limit = 20,
@@ -19,6 +20,11 @@ const getWorks = async (req, res, next) => {
         if (category && category !== 'All Projects') {
             query.categories = category;
         }
+
+        if (service) {
+            query.services = service;
+        }
+
         if (featured === 'true') query.featured = true;
 
         const total = await Work.countDocuments(query);

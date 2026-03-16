@@ -13,8 +13,6 @@ type Service = {
     shortDescription?: string;
     features?: string[];
     image?: string | { url: string };
-    imageLeft?: boolean;
-    isPremium?: boolean;
 };
 
 export default function ServicesList() {
@@ -34,9 +32,10 @@ export default function ServicesList() {
                 if (isAlive) {
                     setServices(response.data);
                 }
-            } catch (err: any) {
+            } catch (err: unknown) {
                 if (isAlive) {
-                    setError(err?.message ?? "Unable to load services.");
+                    const errorMsg = err instanceof Error ? err.message : "Unable to load services.";
+                    setError(errorMsg);
                 }
             } finally {
                 if (isAlive) {
@@ -66,120 +65,95 @@ export default function ServicesList() {
     };
 
     return (
-        <section className="py-20 lg:py-28 bg-[#0A0A0A]">
+        <section className="bg-[#020202] py-20 lg:py-40">
             <div className="mx-auto px-6 lg:px-24">
                 {loading && (
-                    <div className="min-h-[360px] flex items-center justify-center text-muted">
-                        Loading services...
+                    <div className="min-h-[40vh] flex flex-col items-center justify-center text-white/30">
+                        <div className="w-12 h-12 border border-white/10 border-t-accent rounded-full animate-spin mb-6" />
+                        <span className="text-[10px] tracking-[0.3em] uppercase font-bold">Synchronizing Data</span>
                     </div>
                 )}
 
                 {error && (
-                    <div className="min-h-[360px] flex items-center justify-center text-red-400">
-                        {error}
+                    <div className="min-h-[40vh] flex items-center justify-center text-red-500/60 uppercase tracking-widest text-xs font-bold">
+                        [ {error} ]
                     </div>
                 )}
 
-                {!loading && !error && enhancedServices.length === 0 && (
-                    <div className="min-h-[360px] flex items-center justify-center text-muted">
-                        No services are available at the moment.
-                    </div>
-                )}
-
-                <div className="space-y-24 lg:space-y-32">
+                <div className="grid grid-cols-1 gap-12 lg:gap-32">
                     {enhancedServices.map((service, i) => {
-                        const slug = service.slug ?? `service-${i}`;
-                        const isPremium = Boolean(service.isPremium);
-                        const bgClasses = isPremium
-                            ? "bg-gradient-to-r from-amber-950 via-amber-900 to-amber-950 border border-amber-700"
-                            : "";
+                        const isEven = i % 2 === 0;
+                        const slug = service.slug;
 
                         return (
-                            <div
+                            <div 
                                 key={slug}
-                                id={`service-${slug}`}
-                                className={`relative grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${
-                                    service.imageLeft ? "" : "lg:[direction:rtl]"
-                                } ${bgClasses} rounded-xl overflow-hidden`}
+                                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24 group`}
                             >
-                                {isPremium && (
-                                    <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle_at_top,_rgba(253,224,71,0.35),transparent_55%)]" />
-                                )}
-
-                                {/* Image */}
-                                <RevealSection
-                                    animation={service.imageLeft ? "slide-left" : "slide-right"}
-                                    duration={1000}
-                                >
-                                    <div className="img-zoom aspect-4/3 rounded-sm overflow-hidden bg-white/5 lg:[direction:ltr]">
+                                {/* Media Section */}
+                                <div className="w-full lg:w-1/2 relative aspect-video lg:aspect-square xl:aspect-[4/3] rounded-3xl overflow-hidden bg-white/5">
+                                    <div className="absolute inset-0 z-10 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
                                     {getImageUrl(service.image) ? (
                                         <Image
                                             src={getImageUrl(service.image)}
                                             alt={service.title}
-                                            width={700}
-                                            height={525}
-                                            className="w-full h-full object-cover"
-                                            loading="lazy"
+                                            fill
+                                            className="object-cover transform group-hover:scale-105 transition-transform duration-[1.5s] ease-out filter grayscale group-hover:grayscale-0"
+                                            sizes="(max-width: 1024px) 100vw, 50vw"
                                         />
                                     ) : (
-                                        <div className="flex items-center justify-center w-full h-full bg-white/10 text-sm text-white/60">
-                                            No image available
-                                        </div>
+                                        <div className="w-full h-full bg-linear-to-tr from-accent/5 to-white/5" />
                                     )}
+                                    
+                                    {/* Service Number */}
+                                    <div className="absolute top-8 left-8 z-20">
+                                        <span className="text-5xl lg:text-7xl font-black text-white/10 group-hover:text-accent/20 transition-colors duration-700">
+                                            0{i + 1}
+                                        </span>
+                                    </div>
                                 </div>
-                                </RevealSection>
 
-                                {/* Content */}
-                                <div className="lg:[direction:ltr]">
+                                {/* Content Section */}
+                                <div className="w-full lg:w-1/2 flex flex-col">
                                     <RevealSection>
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                                            <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-muted">
-                                                0{i + 1}
-                                            </span>
-                                            {isPremium && (
-                                                <span className="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1 text-[11px] font-semibold tracking-wide text-amber-200">
-                                                    <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
-                                                    Premium
-                                                </span>
-                                            )}
-                                        </div>
-                                        <h2 className="text-3xl lg:text-4xl font-bold text-[#E6F0FF] leading-tight">
+                                        <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white uppercase  leading-none mb-8">
                                             {service.title}
                                         </h2>
                                     </RevealSection>
-
+                                    
                                     <RevealSection delay={150}>
-                                        <p className="mt-5 text-sm text-muted leading-relaxed">
+                                        <p className="text-lg lg:text-xl text-white/50 font-light leading-relaxed mb-12 max-w-xl">
                                             {service.shortDescription}
                                         </p>
                                     </RevealSection>
 
                                     <RevealSection delay={300}>
-                                        <ul className="mt-7 space-y-2.5">
-                                            {service.features?.map((feature: string) => (
-                                                <li
-                                                    key={feature}
-                                                    className="flex items-center gap-3 text-sm text-white/70"
-                                                >
-                                                    <span className="w-1 h-1 rounded-full bg-accent shrink-0" />
-                                                    {feature}
-                                                </li>
+                                        <div className="flex flex-wrap gap-3 mb-16">
+                                            {service.features?.slice(0, 4).map(f => (
+                                                <span key={f} className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-2 rounded-full border border-white/10 text-white/60 bg-white/5">
+                                                    {f}
+                                                </span>
                                             ))}
-                                        </ul>
+                                        </div>
                                     </RevealSection>
 
-                                    <RevealSection delay={400} className="mt-10">
-                                        <Link
+                                    <RevealSection delay={450}>
+                                        <Link 
                                             href={`/services/${slug}`}
-                                            className="inline-flex items-center gap-3 group whitespace-nowrap"
+                                            className="inline-flex items-center gap-6 group/btn"
                                         >
-                                            <span className="font-sans italic text-lg text-[#E6F0FF] group-hover:text-accent transition-colors duration-300">
-                                                Learn More
-                                            </span>
-                                            <span className="inline-block text-[#E6F0FF] group-hover:text-accent group-hover:translate-x-1 transition-all duration-400">
-                                                →
-                                            </span>
+                                            <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover/btn:border-accent">
+                                                <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
+                                                <span className="relative z-10 text-white group-hover/btn:text-black transition-colors duration-500 text-xl font-light">
+                                                    →
+                                                </span>
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <span className="text-xs font-black tracking-[0.3em] uppercase text-white/40 group-hover/btn:text-accent transition-colors duration-500">
+                                                    Explore Case Study
+                                                </span>
+                                                <div className="h-px w-0 bg-accent group-hover/btn:w-full transition-all duration-500" />
+                                            </div>
                                         </Link>
                                     </RevealSection>
                                 </div>

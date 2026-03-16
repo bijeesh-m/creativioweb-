@@ -141,6 +141,12 @@ class ApiClient {
         return this.request(`/services/${slug}`);
     }
 
+    // Public Testimonials
+    async getPublicTestimonials(params?: { featured?: string }) {
+        const queryString = params ? new URLSearchParams(params as Record<string, string>).toString() : '';
+        return this.request(`/testimonials${queryString ? `?${queryString}` : ''}`);
+    }
+
     // Public Works
     async getPublicWorks(params?: Record<string, string>) {
         const query = params ? '?' + new URLSearchParams(params).toString() : '';

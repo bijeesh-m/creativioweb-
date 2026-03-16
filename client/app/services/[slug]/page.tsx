@@ -64,7 +64,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <ServiceDetailHero title={service.title} description={service.shortDescription} />
             <ServiceDetailContent service={service} />
             {service.packages && <ServicePackages packages={service.packages} />}
-            <ServiceProjects serviceTitle={service.title} />
+            <ServiceProjects serviceTitle={service.title} serviceId={service._id} />
             <ServicesCTA />
         </>
     );

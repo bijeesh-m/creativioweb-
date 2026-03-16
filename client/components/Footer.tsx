@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const sitemapLinks = [
@@ -22,10 +23,17 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="lg:col-span-1">
                         <Link href="/" className="flex items-center gap-2 mb-4">
-                            <div className="w-7 h-7 rounded-full border-2 border-navy flex items-center justify-center text-[10px] font-semibold text-navy">
-                                c
+                            <div className="w-20 h-20 rounded-full border-2 border-accent flex items-center justify-center text-[10px] font-semibold text-accent">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Creativio Logo"
+                                    width={46}
+                                    height={46}
+                                    className="object-contain"
+                                />
+                                
                             </div>
-                            <span className="text-base font-semibold tracking-tight text-navy">
+                            <span className="text-base font-semibold tracking-tight text-accent">
                                 Creativio
                             </span>
                         </Link>
@@ -38,7 +46,7 @@ export default function Footer() {
 
                     {/* Sitemap */}
                     <div>
-                        <h4 className="text-[11px] font-semibold tracking-[0.2em] uppercase text-navy mb-5">
+                        <h4 className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent mb-5">
                             Sitemap
                         </h4>
                         <ul className="space-y-3">
@@ -46,7 +54,7 @@ export default function Footer() {
                                 <li key={link.href}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-muted hover:text-navy transition-colors duration-300 link-underline"
+                                        className="text-sm text-muted hover:text-accent transition-colors duration-300 link-underline"
                                     >
                                         {link.label}
                                     </Link>
@@ -57,7 +65,7 @@ export default function Footer() {
 
                     {/* Socials */}
                     <div>
-                        <h4 className="text-[11px] font-semibold tracking-[0.2em] uppercase text-navy mb-5">
+                        <h4 className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent mb-5">
                             Socials
                         </h4>
                         <ul className="space-y-3">
@@ -67,7 +75,7 @@ export default function Footer() {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-sm text-muted hover:text-navy transition-colors duration-300 link-underline"
+                                        className="text-sm text-muted hover:text-accent transition-colors duration-300 link-underline"
                                     >
                                         {link.label}
                                     </a>
@@ -78,14 +86,14 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-[11px] font-semibold tracking-[0.2em] uppercase text-navy mb-5">
+                        <h4 className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent mb-5">
                             Contact
                         </h4>
                         <ul className="space-y-3">
                             <li>
                                 <a
                                     href="mailto:mail@creativio.in"
-                                    className="text-sm text-muted hover:text-navy transition-colors duration-300"
+                                    className="text-sm text-muted hover:text-accent transition-colors duration-300"
                                 >
                                     mail@creativio.in
                                 </a>
@@ -93,7 +101,7 @@ export default function Footer() {
                             <li>
                                 <a
                                     href="tel:+919876543210"
-                                    className="text-sm text-muted hover:text-navy transition-colors duration-300"
+                                    className="text-sm text-muted hover:text-accent transition-colors duration-300"
                                 >
                                     +91 987 654 3210
                                 </a>
@@ -112,13 +120,13 @@ export default function Footer() {
                     <div className="flex gap-6">
                         <a
                             href="#"
-                            className="text-[12px] text-muted hover:text-navy tracking-wide uppercase transition-colors"
+                            className="text-[12px] text-muted hover:text-accent tracking-wide uppercase transition-colors"
                         >
                             Privacy
                         </a>
                         <a
                             href="#"
-                            className="text-[12px] text-muted hover:text-navy tracking-wide uppercase transition-colors"
+                            className="text-[12px] text-muted hover:text-accent tracking-wide uppercase transition-colors"
                         >
                             Terms
                         </a>
