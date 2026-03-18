@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -112,26 +113,14 @@ export default function Navbar() {
                         className="flex items-center gap-2.5 group relative z-[70]"
                         id="nav-logo"
                     >
-                        <div
-                            className={`w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 rounded-full border-2 flex items-center justify-center text-xs lg:text-sm xl:text-base font-semibold transition-all duration-500 ${menuOpen
-                                ? "border-[#E6F0FF] text-[#E6F0FF] group-hover:bg-[#E6F0FF] group-hover:text-[#0A0A0A]"
-                                : isDarkTheme
-                                    ? "border-[#E6F0FF] text-[#E6F0FF] group-hover:bg-[#E6F0FF] group-hover:text-[#0A0A0A]"
-                                    : "border-navy text-navy group-hover:bg-navy group-hover:text-white"
-                                }`}
-                        >
-                            c
-                        </div>
-                        <span
-                            className={`text-lg lg:text-xl font-semibold tracking-tight transition-colors duration-500 ${menuOpen
-                                ? "text-[#E6F0FF]"
-                                : isDarkTheme
-                                    ? "text-[#E6F0FF]"
-                                    : "text-navy"
-                                }`}
-                        >
-                            Creativio
-                        </span>
+                        <Image
+                            src="/logowhite.png"
+                            alt="Creativio"
+                            width={240}
+                            height={80}
+                            className="h-10 lg:h-16 xl:h-20 w-auto object-contain"
+                            priority
+                        />
                     </Link>
 
                     {/* Menu Toggle Button */}

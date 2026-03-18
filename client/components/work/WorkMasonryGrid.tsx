@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { RevealSection } from "@/components/RevealAnimation";
+import { BsEye } from "react-icons/bs";
+import { BiNavigation, BiShare, BiSolidNavigation } from "react-icons/bi";
 interface WorkMasonryGridProps {
     projects?: any[];
     activeCategory?: string;
@@ -18,6 +20,9 @@ export default function WorkMasonryGrid({ projects = [], activeCategory = "All" 
             </div>
         );
     }
+
+    console.log(projects);
+    
 
     return (
         <section className="py-20 lg:py-32 bg-[#0A0A0A]">
@@ -65,7 +70,20 @@ export default function WorkMasonryGrid({ projects = [], activeCategory = "All" 
                                     )}
                                     {/* Gradient overlay for text */}
                                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-
+                                    {/* --- Visit Site Button (Only for Web Dev) --- */}
+                                    {project.categories.includes("WEB DEVELOPMENT") && project.liveLink && (
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-10">
+                                            <a
+                                                href={project.liveLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={(e) => e.stopPropagation()} // Prevents opening the modal
+                                                className="px-5 py-2 flex items-center gap-3 bg-white  backdrop-blur-2xl text-black text-[11px] font-bold tracking-widest uppercase rounded-full transform translate-y-2 group-hover:translate-y-0 transition-all hover:bg-accent hover:text-white"
+                                            >
+                                                Visit Site <BiSolidNavigation/>
+                                            </a>
+                                        </div>
+                                    )}
                                     {/* Content inside the image card */}
                                     <div className="absolute inset-0 p-8 flex flex-col justify-end">
                                         <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">

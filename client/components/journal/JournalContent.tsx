@@ -139,7 +139,7 @@ export default function JournalContent() {
                         {/* Sidebar */}
                         <RevealSection animation="slide-left">
                             <div className="lg:sticky lg:top-[100px]">
-                                <h3 className="font-sans italic text-2xl text-[#E6F0FF] mb-5">
+                                <h3 className="font-sans  text-2xl text-[#E6F0FF] mb-5">
                                     Categories
                                 </h3>
                                 <div className="space-y-2.5">
@@ -169,7 +169,7 @@ export default function JournalContent() {
                                 </div>
 
                                 <div className="mt-10 pt-8 border-t border-border">
-                                    <h3 className="font-sans italic text-xl text-[#E6F0FF] mb-5">
+                                    <h3 className="font-sans  text-xl text-[#E6F0FF] mb-5">
                                         Trending
                                     </h3>
                                     <div className="space-y-4">

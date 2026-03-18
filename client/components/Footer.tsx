@@ -22,20 +22,14 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                     {/* Brand */}
                     <div className="lg:col-span-1">
-                        <Link href="/" className="flex items-center gap-2 mb-4">
-                            <div className="w-20 h-20 rounded-full border-2 border-accent flex items-center justify-center text-[10px] font-semibold text-accent">
-                                <Image
-                                    src="/logo.png"
-                                    alt="Creativio Logo"
-                                    width={46}
-                                    height={46}
-                                    className="object-contain"
-                                />
-                                
-                            </div>
-                            <span className="text-base font-semibold tracking-tight text-accent">
-                                Creativio
-                            </span>
+                        <Link href="/" className="inline-block mb-4">
+                            <Image
+                                src="/logoblack.png"
+                                alt="Creativio Logo"
+                                width={250}
+                                height={80}
+                                className="h-12 lg:h-20 xl:h-24 w-auto object-contain"
+                            />
                         </Link>
                         <p className="text-sm text-muted leading-relaxed max-w-[260px]">
                             Best digital marketing agency in Calicut and Malappuram,

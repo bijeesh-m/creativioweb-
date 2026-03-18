@@ -15,7 +15,7 @@ export default function WorksManager() {
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
     const [editingWork, setEditingWork] = useState<any>(null);
-    const [formData, setFormData] = useState({ title: "", categories: "[]", tags: "", description: "", client: "", tall: false, featured: false, isPublished: true });
+    const [formData, setFormData] = useState({ title: "", categories: "[]", tags: "", description: "", client: "", liveLink: "", tall: false, featured: false, isPublished: true });
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState("");
     const [mediaType, setMediaType] = useState("image");
@@ -33,13 +33,13 @@ export default function WorksManager() {
     };
 
     const resetForm = () => {
-        setFormData({ title: "", categories: "[]", tags: "", description: "", client: "", tall: false, featured: false, isPublished: true });
+        setFormData({ title: "", categories: "[]", tags: "", description: "", client: "", liveLink: "", tall: false, featured: false, isPublished: true });
         setImageFile(null); setImagePreview(""); setMediaType("image"); setEditingWork(null); setShowForm(false); setError("");
     };
 
     const handleEdit = (work: any) => {
         setEditingWork(work);
-        setFormData({ title: work.title, categories: JSON.stringify(work.categories || []), tags: work.tags || "", description: work.description || "", client: work.client || "", tall: work.tall || false, featured: work.featured || false, isPublished: work.isPublished !== false });
+        setFormData({ title: work.title, categories: JSON.stringify(work.categories || []), tags: work.tags || "", description: work.description || "", client: work.client || "", liveLink: work.liveLink || "", tall: work.tall || false, featured: work.featured || false, isPublished: work.isPublished !== false });
         setImagePreview(work.image?.url || "");
         setMediaType(work.image?.mediaType || "image");
         setShowForm(true);
@@ -63,6 +63,7 @@ export default function WorksManager() {
             fd.append("tags", formData.tags);
             fd.append("description", formData.description);
             fd.append("client", formData.client);
+            fd.append("liveLink", formData.liveLink);
             fd.append("tall", String(formData.tall));
             fd.append("featured", String(formData.featured));
             fd.append("isPublished", String(formData.isPublished));
@@ -104,6 +105,7 @@ export default function WorksManager() {
                             <div className="admin-form-grid">
                                 <div className="admin-input-group"><label>Title *</label><input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} required /></div>
                                 <div className="admin-input-group"><label>Tags</label><input type="text" value={formData.tags} onChange={(e) => setFormData({ ...formData, tags: e.target.value })} placeholder="SEO · DIGITAL MARKETING" /></div>
+                                <div className="admin-input-group"><label>Live Link</label><input type="text" value={formData.liveLink} onChange={(e) => setFormData({ ...formData, liveLink: e.target.value })} placeholder="https://example.com" /></div>
                                 <div className="admin-input-group"><label>Client</label><input type="text" value={formData.client} onChange={(e) => setFormData({ ...formData, client: e.target.value })} /></div>
                                 <div className="admin-input-group"><label>Categories (JSON)</label><input type="text" value={formData.categories} onChange={(e) => setFormData({ ...formData, categories: e.target.value })} placeholder='["Digital Marketing", "Branding"]' /></div>
                             </div>
@@ -233,6 +235,16 @@ export default function WorksManager() {
                         <div className="admin-viewer-info">
                             <h4>{selectedWorkForView.title}</h4>
                             <p>{selectedWorkForView.client || "No client specified"}</p>
+                            {selectedWorkForView.liveLink && (
+                                <a
+                                    href={selectedWorkForView.liveLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: 'blue', textDecoration: 'underline', fontSize: '0.9rem' }}
+                                >
+                                    Visit Website
+                                </a>
+                            )}
                             <div className="admin-tags">
                                 {selectedWorkForView.categories?.map((c: string) => (
                                     <span key={c} className="admin-tag">{c}</span>

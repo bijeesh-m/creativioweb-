@@ -29,7 +29,8 @@ export default function WorkContent() {
                         image: work.image.url,
                         mediaType: work.image.mediaType,
                         tall: work.tall,
-                        slug: work.slug
+                        slug: work.slug,
+                        liveLink: work.liveLink
                     }));
                     setProjects(mappedWorks);
                 }
